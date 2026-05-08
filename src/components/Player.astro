@@ -1,15 +1,15 @@
 ---
-// 하단 고정 오디오 플레이어. 한지 배경에 먹 톤으로 강한 콘트라스트.
+// 하단 고정 오디오 플레이어. 우주 보라-검정 위에 cream 텍스트 + 단청 적색 progress.
 ---
 
 <div
   id="player"
-  style="position: fixed; left: 0; right: 0; bottom: 0; background: var(--color-ink); color: var(--color-paper); padding: 12px 24px; display: flex; align-items: center; gap: 14px; z-index: 100; font-family: var(--font-sans);"
+  style="position: fixed; left: 0; right: 0; bottom: 0; background: rgba(10, 6, 18, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 0.5px solid var(--color-border-strong); color: var(--color-text-primary); padding: 12px 24px; display: flex; align-items: center; gap: 14px; z-index: 100; font-family: var(--font-sans);"
 >
   <button
     id="player-play"
     aria-label="Play / Pause"
-    style="background: transparent; border: none; padding: 0; color: var(--color-paper); cursor: pointer; display: flex; align-items: center;"
+    style="background: transparent; border: none; padding: 0; color: var(--color-text-primary); cursor: pointer; display: flex; align-items: center;"
   >
     <svg id="player-icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
       ><path d="M8 5v14l11-7z"></path></svg
@@ -28,32 +28,32 @@
     <div
       id="player-title"
       class="serif"
-      style="font-size: 13px; font-weight: 500; color: var(--color-paper);"
+      style="font-size: 13px; font-weight: 500; color: var(--color-text-primary);"
     >
       —
     </div>
     <div
       id="player-meta"
       class="mono"
-      style="font-size: 10px; color: var(--color-border);"
+      style="font-size: 10px; color: var(--color-text-faded);"
     >
       no track loaded
     </div>
   </div>
   <div
     id="player-track"
-    style="flex: 2; height: 2px; background: var(--color-ink-soft); position: relative; min-width: 80px; cursor: pointer;"
+    style="flex: 2; height: 2px; background: var(--color-surface-3); position: relative; min-width: 80px; cursor: pointer;"
   >
     <div
       id="player-progress"
-      style="position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: var(--color-dancheong-red);"
+      style="position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: var(--color-dancheong-red); box-shadow: 0 0 10px rgba(232, 72, 82, 0.6);"
     >
     </div>
   </div>
   <div
     id="player-time"
     class="mono"
-    style="font-size: 10px; color: var(--color-border); white-space: nowrap;"
+    style="font-size: 10px; color: var(--color-text-faded); white-space: nowrap;"
   >
     0:00 / 0:00
   </div>
@@ -110,7 +110,7 @@
         audio.src = track.audio_url;
         titleEl.textContent = track.title_ko;
         metaEl.textContent =
-          (track.fusion_instrument || track.genre) + ' \u2297 ' + (track.fusion_with_label || track.genre);
+          (track.fusion_with_label || track.fusion_with) + ' \u2297 ' + track.genre;
         audio.play().catch(() => {});
       },
     };

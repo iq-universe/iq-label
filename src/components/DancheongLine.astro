@@ -1,5 +1,5 @@
 ---
-// 단청 라인 — header 하단 장식 띠. 단청 패턴을 미니멀하게 추상화한 점선 + 끊어진 선.
+// 단청 라인 — 우주 버전. 밝은 단청 적색이 빛처럼 옆으로 fade out.
 ---
 
 <svg
@@ -10,15 +10,19 @@
   style="display: block;"
   aria-hidden="true"
 >
-  <line x1="0" y1="1.5" x2="120" y2="1.5" stroke="var(--color-dancheong-red)" stroke-width="1" />
-  <line x1="124" y1="1.5" x2="128" y2="1.5" stroke="var(--color-dancheong-red)" stroke-width="1" />
-  <line
-    x1="132"
-    y1="1.5"
-    x2="800"
-    y2="1.5"
-    stroke="var(--color-ink)"
-    stroke-width="0.5"
-    opacity="0.3"
-  />
+  <defs>
+    <linearGradient id="dancheong-glow" x1="0" x2="1">
+      <stop offset="0%" stop-color="rgba(232, 72, 82, 0.9)" />
+      <stop offset="15%" stop-color="rgba(232, 72, 82, 0.4)" />
+      <stop offset="100%" stop-color="rgba(232, 72, 82, 0)" />
+    </linearGradient>
+    <linearGradient id="ink-fade" x1="0" x2="1">
+      <stop offset="0%" stop-color="rgba(61, 52, 80, 0)" />
+      <stop offset="20%" stop-color="rgba(61, 52, 80, 0.6)" />
+      <stop offset="100%" stop-color="rgba(61, 52, 80, 0.6)" />
+    </linearGradient>
+  </defs>
+  <line x1="0" y1="1.5" x2="120" y2="1.5" stroke="url(#dancheong-glow)" stroke-width="1.2" />
+  <line x1="124" y1="1.5" x2="128" y2="1.5" stroke="rgba(232, 72, 82, 0.5)" stroke-width="1" />
+  <line x1="132" y1="1.5" x2="800" y2="1.5" stroke="url(#ink-fade)" stroke-width="0.5" />
 </svg>

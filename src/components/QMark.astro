@@ -1,0 +1,50 @@
+---
+interface Props {
+  size?: number;
+  color?: string;
+  withCore?: boolean;
+}
+
+const { size = 40, color = 'currentColor', withCore = true } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 64 64"
+  fill="none"
+  aria-label="Label Q"
+  role="img"
+>
+  <circle cx="28" cy="28" r="22" stroke={color} stroke-width="2.2" fill="none" />
+  {withCore && <circle cx="28" cy="28" r="1.6" fill="var(--color-dancheong-red)" />}
+  <line
+    x1="42"
+    y1="42"
+    x2="48"
+    y2="48"
+    stroke={color}
+    stroke-width="2.2"
+    stroke-linecap="round"
+  />
+  <line
+    x1="50"
+    y1="50"
+    x2="53"
+    y2="53"
+    stroke={color}
+    stroke-width="2"
+    stroke-linecap="round"
+    opacity="0.6"
+  />
+  <line
+    x1="55"
+    y1="55"
+    x2="56.5"
+    y2="56.5"
+    stroke={color}
+    stroke-width="1.6"
+    stroke-linecap="round"
+    opacity="0.3"
+  />
+</svg>

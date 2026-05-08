@@ -22,7 +22,7 @@ const heights = Array.from({ length: bars }, (_, i) => {
 const playedRatio = 0.45;
 ---
 
-<div style="color: var(--color-ink);">
+<div>
   <svg width="100%" height="56" viewBox={`0 0 ${bars * 12} 56`} preserveAspectRatio="none">
     {
       heights.map((h, i) => (
@@ -31,8 +31,9 @@ const playedRatio = 0.45;
           y={(56 - h) / 2}
           width="6"
           height={h}
-          fill={i / bars < playedRatio ? 'var(--color-dancheong-red)' : 'currentColor'}
-          opacity={i / bars < playedRatio ? 0.9 : 0.3}
+          fill={i / bars < playedRatio ? 'var(--color-dancheong-red)' : 'var(--color-text-secondary)'}
+          opacity={i / bars < playedRatio ? 0.95 : 0.4}
+          style={i / bars < playedRatio ? 'filter: drop-shadow(0 0 4px rgba(232, 72, 82, 0.5));' : ''}
         />
       ))
     }

@@ -29,7 +29,7 @@ const instrumentLabel = track.fusion_with_label || track.fusion_with;
 ---
 
 <section style="position: relative; padding: 56px 24px 44px; max-width: 760px; margin: 0 auto;">
-  <div style="position: absolute; top: 30px; right: 18px; opacity: 0.85; pointer-events: none;">
+  <div style="position: absolute; top: 30px; right: 18px; pointer-events: none;">
     <div class="fan-wrap">
       <FanHero size={220} />
     </div>
@@ -40,24 +40,26 @@ const instrumentLabel = track.fusion_with_label || track.fusion_with;
   </div>
 
   <h1
-    class="serif"
-    style="font-size: 48px; font-weight: 500; margin: 0 0 10px; line-height: 1.05; max-width: 480px;"
+    class="serif glow-cream"
+    style="font-size: 50px; font-weight: 500; margin: 0 0 10px; line-height: 1.05; max-width: 480px;"
   >
     <a href={`/track/${track.id}`}>{track.title_ko}</a>
   </h1>
 
   <div
-    style="font-style: italic; font-size: 15px; color: var(--color-ink-soft); margin-bottom: 28px; max-width: 360px;"
+    style="font-style: italic; font-size: 15px; color: var(--color-text-secondary); margin-bottom: 28px; max-width: 360px;"
   >
     {track.title_en}
   </div>
 
   <div
     class="mono"
-    style="display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--color-ink-soft); margin-bottom: 28px;"
+    style="display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--color-text-secondary); margin-bottom: 28px;"
   >
     <InstrumentIcon size={22} />
-    <span class="serif" style="font-size: 14px; letter-spacing: 0;">{instrumentLabel}</span>
+    <span class="serif" style="font-size: 14px; letter-spacing: 0; color: var(--color-text-primary);">
+      {instrumentLabel}
+    </span>
     <span class="fusion-op">⊗</span>
     <span>{track.genre}</span>
   </div>

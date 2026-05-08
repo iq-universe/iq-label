@@ -9,37 +9,37 @@ const universe = [
 ];
 ---
 
-<Layout title="About — iq-label">
+<Layout title="About — Label Q">
   <article style="max-width: 640px; margin: 0 auto; padding: 56px 24px;">
     <div class="tag" style="margin-bottom: 12px;">ABOUT / 소개</div>
     <h1
-      class="serif"
-      style="font-size: 38px; font-weight: 500; margin: 0 0 12px; line-height: 1.15;"
+      class="serif glow-cream"
+      style="font-size: 40px; font-weight: 500; margin: 0 0 12px; line-height: 1.15;"
     >
-      이큐 유니버스
+      IQ Universe
     </h1>
     <p
-      style="font-style: italic; font-size: 16px; color: var(--color-ink-soft); margin: 0 0 32px;"
+      style="font-style: italic; font-size: 16px; color: var(--color-text-secondary); margin: 0 0 32px;"
     >
-      iq-label은 IQ Universe의 발행처 중 하나입니다.
+      Label Q는 IQ Universe의 발행처 중 하나입니다.
     </p>
 
-    <div style="display: flex; flex-direction: column; border-top: 1px solid var(--color-border);">
+    <div style="display: flex; flex-direction: column; border-top: 0.5px solid var(--color-border);">
       {
         universe.map((site) => (
           <a
             href={site.url}
-            style="display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--color-border);"
+            style="display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 0.5px solid var(--color-border);"
           >
             <div>
-              <div class="serif" style="font-size: 18px; font-weight: 500; line-height: 1.3;">
+              <div class="serif" style="font-size: 18px; font-weight: 500; line-height: 1.3; color: var(--color-text-primary);">
                 {site.label}
               </div>
-              <div class="mono" style="font-size: 11px; color: var(--color-ink-faded); margin-top: 4px;">
+              <div class="mono" style="font-size: 11px; color: var(--color-text-faded); margin-top: 4px;">
                 {site.desc}
               </div>
             </div>
-            <span class="mono" style="font-size: 14px; color: var(--color-ink-faded);">→</span>
+            <span class="mono" style="font-size: 14px; color: var(--color-text-faded);">→</span>
           </a>
         ))
       }
