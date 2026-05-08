@@ -2,26 +2,26 @@
   {
     "id": "boom-bap-001",
     "number": "001",
-    "title_ko": "출퇴근의 무게",
-    "title_en": "Weight of the commute",
+    "title_ko": "야시장의 현",
+    "title_en": "Night Market Strings",
     "genre": "boom-bap",
-    "fusion_with": "pansori",
-    "fusion_with_label": "판소리",
-    "fusion_instrument": "janggu",
-    "duration_sec": 187,
-    "duration_label": "3:07",
-    "bpm": 88,
-    "key": "Cm",
-    "mood_tags": ["nostalgic", "rainy", "introspective"],
-    "vibe_notes": "먹먹한 새벽 출근길에 걸어주는 위로 같은 곡. 판소리 보컬 샘플의 끝부분이 후렴 직전에 살짝 울리는 게 핵심. 47개 후보 중 이거 하나가 그 타이밍을 정확히 잡았다.",
-    "reference_artists": ["J Dilla", "Pete Rock"],
+    "fusion_with": "gayageum",
+    "fusion_with_label": "가야금",
+    "fusion_instrument": "gayageum",
+    "duration_sec": 180,
+    "duration_label": "3:00",
+    "bpm": 90,
+    "key": "Am",
+    "mood_tags": ["nocturnal", "atmospheric", "string-driven"],
+    "vibe_notes": "야시장의 분주함이 가야금의 잔향에 잠겨드는 곡. 늦은 밤 골목에서 멀리 들려오는 현의 울림 같은 느낌. (실제 청취 후 vibe notes 업데이트 예정)",
+    "reference_artists": [],
     "generation": {
       "tool": "suno-v4",
-      "candidate_count": 47,
+      "candidate_count": 1,
       "selected": 1
     },
     "audio_url": "/audio/boom-bap-001.mp3",
     "license": "CC-BY-NC-4.0",
-    "published_at": "2026-05-12"
+    "published_at": "2026-05-08"
   }
 ]
