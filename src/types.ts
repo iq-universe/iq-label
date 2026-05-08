@@ -1,3 +1,11 @@
+export type KoreanInstrument =
+  | 'janggu'
+  | 'buk'
+  | 'gayageum'
+  | 'haegeum'
+  | 'danso'
+  | 'geomungo';
+
 export interface Track {
   id: string;
   number: string;
@@ -5,6 +13,8 @@ export interface Track {
   title_en: string;
   genre: string;
   fusion_with: string;
+  fusion_with_label: string;
+  fusion_instrument: KoreanInstrument;
   duration_sec: number;
   duration_label: string;
   bpm: number;
@@ -25,6 +35,8 @@ export interface Track {
 export interface Genre {
   slug: string;
   label: string;
+  instrument: KoreanInstrument;
+  instrument_label_ko: string;
   track_count: number;
   status: 'active' | 'coming';
 }

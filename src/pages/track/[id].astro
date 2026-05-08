@@ -2,6 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 import Waveform from '../../components/Waveform.astro';
 import VibeNotes from '../../components/VibeNotes.astro';
+import Stamp from '../../components/Stamp.astro';
+import JanguIcon from '../../components/icons/JanguIcon.astro';
+import BukIcon from '../../components/icons/BukIcon.astro';
+import GayageumIcon from '../../components/icons/GayageumIcon.astro';
+import HaegeumIcon from '../../components/icons/HaegeumIcon.astro';
+import DansoIcon from '../../components/icons/DansoIcon.astro';
+import GeomungoIcon from '../../components/icons/GeomungoIcon.astro';
 import tracksData from '../../data/tracks.json';
 import type { Track } from '../../types';
 
@@ -19,83 +26,120 @@ interface Props {
 
 const { track } = Astro.props;
 const trackJson = JSON.stringify(track);
+
+const iconMap: Record<string, any> = {
+  janggu: JanguIcon,
+  buk: BukIcon,
+  gayageum: GayageumIcon,
+  haegeum: HaegeumIcon,
+  danso: DansoIcon,
+  geomungo: GeomungoIcon,
+};
+const InstrumentIcon = iconMap[track.fusion_instrument] || JanguIcon;
 ---
 
 <Layout title={`${track.title_ko} — iq-label`}>
   <div style="max-width: 760px; margin: 0 auto;">
     <div
-      style="padding: 12px 24px; border-bottom: 0.5px solid var(--color-border); display: flex; align-items: center; gap: 8px; color: var(--color-text-secondary); font-size: 13px;"
+      class="mono"
+      style="padding: 14px 24px; display: flex; align-items: center; gap: 8px; color: var(--color-ink-faded); font-size: 11px; letter-spacing: 0.05em;"
     >
       <a href={`/genre/${track.genre}`} style="display: flex; align-items: center; gap: 8px;">
         ← back to {track.genre}
       </a>
     </div>
 
-    <div style="display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 28px 24px;">
+    <div
+      style="display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 28px 24px;"
+      class="track-grid"
+    >
       <div
-        style="aspect-ratio: 1; background: var(--color-accent-bg); border-radius: var(--radius-md); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;"
+        style="aspect-ratio: 1; background: var(--color-paper-warm); border: 1px solid var(--color-ink); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; position: relative;"
       >
-        <div class="mono" style="font-size: 11px; color: var(--color-accent); opacity: 0.8;">
-          no. {track.number}
+        <div class="mono" style="font-size: 10px; color: var(--color-ink-faded); letter-spacing: 0.12em;">
+          NO. {track.number}
+        </div>
+        <div
+          style="display: flex; align-items: center; justify-content: center; flex: 1; color: var(--color-ink);"
+        >
+          <InstrumentIcon size={64} strokeWidth={0.9} />
         </div>
         <div>
-          <div class="mono" style="font-size: 11px; color: var(--color-accent);">
-            {track.genre} ⊗ {track.fusion_with}
+          <div class="serif" style="font-size: 13px; font-weight: 500;">
+            {track.fusion_with_label}
           </div>
-          <div
-            class="mono"
-            style="font-size: 11px; color: var(--color-accent); opacity: 0.7; margin-top: 2px;"
-          >
+          <div class="mono" style="font-size: 10px; color: var(--color-ink-faded); margin-top: 1px;">
             {track.published_at.slice(0, 4)}
           </div>
+        </div>
+        <div style="position: absolute; bottom: -10px; right: -10px;">
+          <Stamp text={track.number} size={36} rotate={-6} />
         </div>
       </div>
 
       <div style="min-width: 0;">
-        <div class="tag" style="margin-bottom: 8px;">{track.genre} / no. {track.number}</div>
-        <h1 class="serif" style="font-size: 28px; font-weight: 500; margin: 0 0 4px; line-height: 1.2;">
+        <div class="tag" style="margin-bottom: 8px;">
+          {track.genre} / no. {track.number}
+        </div>
+        <h1
+          class="serif"
+          style="font-size: 34px; font-weight: 500; margin: 0 0 6px; line-height: 1.1;"
+        >
           {track.title_ko}
         </h1>
-        <div class="muted" style="font-size: 14px; margin-bottom: 16px;">{track.title_en}</div>
-        <div class="mono muted" style="font-size: 13px; margin-bottom: 6px;">
-          {track.genre}<span class="fusion-op">⊗</span>{track.fusion_with}
+        <div
+          style="font-style: italic; font-size: 14px; color: var(--color-ink-soft); margin-bottom: 18px;"
+        >
+          {track.title_en}
         </div>
-        <div class="mono tertiary" style="font-size: 12px; margin-bottom: 18px;">
+        <div
+          class="mono"
+          style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--color-ink-soft); margin-bottom: 6px;"
+        >
+          <InstrumentIcon size={18} />
+          <span class="serif" style="font-size: 13px; letter-spacing: 0;">{track.fusion_with_label}</span>
+          <span class="fusion-op">⊗</span>
+          <span>{track.genre}</span>
+        </div>
+        <div class="mono" style="font-size: 11px; color: var(--color-ink-faded); margin-bottom: 22px;">
           {track.duration_label} · {track.bpm} bpm · {track.key}
         </div>
-        <button data-track={trackJson} style="display: inline-flex; align-items: center; gap: 8px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
-            ><path d="M8 5v14l11-7z"></path></svg
-          >
-          Play
-        </button>
+        <button data-track={trackJson}>▶ PLAY</button>
       </div>
     </div>
 
     <div style="padding: 0 24px 22px;">
       <Waveform trackId={track.id} />
       <div style="display: flex; justify-content: space-between; margin-top: 4px;">
-        <span class="mono tertiary" style="font-size: 11px;">0:00</span>
-        <span class="mono tertiary" style="font-size: 11px;">{track.duration_label}</span>
+        <span class="mono" style="font-size: 10px; color: var(--color-ink-faded);">0:00</span>
+        <span class="mono" style="font-size: 10px; color: var(--color-ink-faded);">
+          {track.duration_label}
+        </span>
       </div>
     </div>
 
     <VibeNotes notes={track.vibe_notes} />
 
-    <details style="border-top: 0.5px solid var(--color-border);">
+    <details style="border-top: 1px solid var(--color-border);">
       <summary
         style="padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; list-style: none;"
       >
         <div>
-          <div class="tag" style="margin-bottom: 4px;">generation</div>
-          <div class="mono muted" style="font-size: 13px;">
-            {track.generation.candidate_count} candidates · {track.generation.selected} selected · {track.generation.tool}
+          <div class="tag" style="margin-bottom: 4px;">GENERATION · 생성 정보</div>
+          <div class="mono" style="font-size: 12px; color: var(--color-ink-soft);">
+            {track.generation.candidate_count} candidates · {track.generation.selected} selected ·
+            {track.generation.tool}
           </div>
         </div>
-        <span class="tertiary" style="font-size: 18px;">▾</span>
+        <span class="mono" style="font-size: 14px; color: var(--color-ink-faded);">▾</span>
       </summary>
-      <div style="padding: 0 24px 22px; color: var(--color-text-secondary); font-size: 14px;">
-        <p>이 트랙은 <strong>{track.generation.tool}</strong> 으로 {track.generation.candidate_count}개 후보를 생성하고, 그중 {track.generation.selected}곡을 선별했습니다.</p>
+      <div
+        style="padding: 0 24px 22px; color: var(--color-ink-soft); font-size: 14px; line-height: 1.7;"
+      >
+        <p>
+          이 트랙은 <span class="mono" style="font-weight: 500;">{track.generation.tool}</span>
+          으로 {track.generation.candidate_count}개 후보를 생성하고, 그중 {track.generation.selected}곡을 선별했습니다.
+        </p>
         {
           track.reference_artists.length > 0 && (
             <p>
@@ -109,8 +153,18 @@ const trackJson = JSON.stringify(track);
             </p>
           )
         }
-        <p class="tertiary" style="font-size: 12px;">License: {track.license}</p>
+        <p style="font-size: 11px; color: var(--color-ink-faded);" class="mono">
+          License: {track.license}
+        </p>
       </div>
     </details>
   </div>
+
+  <style>
+    @media (max-width: 540px) {
+      .track-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
 </Layout>

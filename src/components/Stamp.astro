@@ -1,0 +1,15 @@
+---
+interface Props {
+  text?: string;
+  size?: number;
+  rotate?: number;
+}
+
+const { text = '印', size = 48, rotate = -3 } = Astro.props;
+---
+
+<div
+  style={`display: inline-flex; align-items: center; justify-content: center; width: ${size}px; height: ${size}px; background: var(--color-dancheong-red); color: var(--color-paper); font-family: var(--font-serif); font-size: ${size * 0.32}px; font-weight: 500; line-height: 1; transform: rotate(${rotate}deg); letter-spacing: -0.02em; user-select: none; box-shadow: 0 0 0 1px var(--color-dancheong-red-deep);`}
+>
+  {text}
+</div>

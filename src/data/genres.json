@@ -2,18 +2,48 @@
   {
     "slug": "boom-bap",
     "label": "boom-bap",
+    "instrument": "janggu",
+    "instrument_label_ko": "장구",
     "track_count": 1,
     "status": "active"
   },
   {
     "slug": "funky",
     "label": "funky",
+    "instrument": "buk",
+    "instrument_label_ko": "북",
     "track_count": 0,
     "status": "coming"
   },
   {
     "slug": "jazz",
     "label": "jazz",
+    "instrument": "gayageum",
+    "instrument_label_ko": "가야금",
+    "track_count": 0,
+    "status": "coming"
+  },
+  {
+    "slug": "ambient",
+    "label": "ambient",
+    "instrument": "haegeum",
+    "instrument_label_ko": "해금",
+    "track_count": 0,
+    "status": "coming"
+  },
+  {
+    "slug": "lo-fi",
+    "label": "lo-fi",
+    "instrument": "danso",
+    "instrument_label_ko": "단소",
+    "track_count": 0,
+    "status": "coming"
+  },
+  {
+    "slug": "experimental",
+    "label": "experimental",
+    "instrument": "geomungo",
+    "instrument_label_ko": "거문고",
     "track_count": 0,
     "status": "coming"
   }

@@ -7,10 +7,22 @@ const { notes } = Astro.props;
 ---
 
 <div
-  style="padding: 22px 28px; border-top: 0.5px solid var(--color-border); background: var(--color-bg-card);"
+  style="padding: 22px 26px; border-top: 1px solid var(--color-border); background: var(--color-paper-warm); position: relative;"
 >
-  <div class="tag" style="margin-bottom: 10px;">vibe notes</div>
-  <p style="margin: 0; font-size: 15px; line-height: 1.7; color: var(--color-text-primary);">
+  <div class="tag" style="margin-bottom: 10px;">VIBE NOTES · 큐레이션 메모</div>
+  <p
+    class="serif"
+    style="margin: 0; font-size: 16px; line-height: 1.75; color: var(--color-ink); font-weight: 400;"
+  >
     {notes}
   </p>
+  <svg
+    width="20"
+    height="2"
+    viewBox="0 0 20 2"
+    style="margin-top: 16px; display: block;"
+    aria-hidden="true"
+  >
+    <line x1="0" y1="1" x2="20" y2="1" stroke="var(--color-dancheong-red)" stroke-width="1.5" />
+  </svg>
 </div>

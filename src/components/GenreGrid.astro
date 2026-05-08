@@ -1,43 +1,83 @@
 ---
 import type { Genre } from '../types';
+import JanguIcon from './icons/JanguIcon.astro';
+import BukIcon from './icons/BukIcon.astro';
+import GayageumIcon from './icons/GayageumIcon.astro';
+import HaegeumIcon from './icons/HaegeumIcon.astro';
+import DansoIcon from './icons/DansoIcon.astro';
+import GeomungoIcon from './icons/GeomungoIcon.astro';
 
 interface Props {
   genres: Genre[];
+  showHeading?: boolean;
 }
 
-const { genres } = Astro.props;
+const { genres, showHeading = true } = Astro.props;
+
+const iconMap: Record<string, any> = {
+  janggu: JanguIcon,
+  buk: BukIcon,
+  gayageum: GayageumIcon,
+  haegeum: HaegeumIcon,
+  danso: DansoIcon,
+  geomungo: GeomungoIcon,
+};
 ---
 
-<section style="padding: 24px; max-width: 760px; margin: 0 auto;">
-  <div class="tag" style="margin-bottom: 14px;">genres</div>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;">
+<section style="padding: 28px 24px 14px; max-width: 760px; margin: 0 auto;">
+  {
+    showHeading && (
+      <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; padding-top: 10px; border-top: 1px solid var(--color-border);">
+        <div>
+          <span class="serif" style="font-size: 18px; font-weight: 500;">
+            장르 / Genres
+          </span>
+          <span class="mono" style="font-size: 11px; color: var(--color-ink-faded); margin-left: 12px;">
+            {genres.length} categories
+          </span>
+        </div>
+      </div>
+    )
+  }
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px;">
     {
-      genres.map((g) =>
-        g.status === 'active' ? (
+      genres.map((g) => {
+        const Icon = iconMap[g.instrument] || JanguIcon;
+        const isActive = g.status === 'active';
+        return isActive ? (
           <a
             href={`/genre/${g.slug}`}
-            style="background: var(--color-bg-card); border: 0.5px solid var(--color-border-strong); border-radius: var(--radius-md); padding: 16px; display: block;"
+            style="background: var(--color-paper-warm); border: 0.5px solid var(--color-border-strong); padding: 16px 14px; position: relative; display: block;"
           >
-            <div class="mono" style="font-size: 13px; font-weight: 500;">
-              {g.label}
+            <div style="margin-bottom: 10px; color: var(--color-ink);">
+              <Icon size={28} />
             </div>
-            <div style="font-size: 12px; color: var(--color-text-tertiary); margin-top: 4px;">
-              {g.track_count} tracks
+            <div class="serif" style="font-size: 16px; font-weight: 500; line-height: 1.2;">
+              {g.instrument_label_ko}
             </div>
+            <div class="mono" style="font-size: 11px; color: var(--color-ink-faded); margin-top: 2px;">
+              {g.label} · {g.track_count}
+            </div>
+            <div
+              style="position: absolute; top: 12px; right: 12px; width: 6px; height: 6px; background: var(--color-dancheong-red); border-radius: 50%;"
+            />
           </a>
         ) : (
           <div
-            style="background: var(--color-bg-card); border: 0.5px solid var(--color-border); border-radius: var(--radius-md); padding: 16px; opacity: 0.55;"
+            style="background: var(--color-paper-warm); border: 0.5px solid var(--color-border); padding: 16px 14px; opacity: 0.55;"
           >
-            <div class="mono" style="font-size: 13px;">
-              {g.label}
+            <div style="margin-bottom: 10px; color: var(--color-ink);">
+              <Icon size={28} />
             </div>
-            <div style="font-size: 12px; color: var(--color-text-tertiary); margin-top: 4px;">
-              coming
+            <div class="serif" style="font-size: 16px; font-weight: 500; line-height: 1.2;">
+              {g.instrument_label_ko}
+            </div>
+            <div class="mono" style="font-size: 11px; color: var(--color-ink-faded); margin-top: 2px;">
+              {g.label} · soon
             </div>
           </div>
-        ),
-      )
+        );
+      })
     }
   </div>
 </section>

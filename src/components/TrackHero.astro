@@ -1,5 +1,12 @@
 ---
 import type { Track } from '../types';
+import FanHero from './FanHero.astro';
+import JanguIcon from './icons/JanguIcon.astro';
+import BukIcon from './icons/BukIcon.astro';
+import GayageumIcon from './icons/GayageumIcon.astro';
+import HaegeumIcon from './icons/HaegeumIcon.astro';
+import DansoIcon from './icons/DansoIcon.astro';
+import GeomungoIcon from './icons/GeomungoIcon.astro';
 
 interface Props {
   track: Track;
@@ -7,21 +14,63 @@ interface Props {
 
 const { track } = Astro.props;
 const trackJson = JSON.stringify(track);
+
+const iconMap: Record<string, any> = {
+  janggu: JanguIcon,
+  buk: BukIcon,
+  gayageum: GayageumIcon,
+  haegeum: HaegeumIcon,
+  danso: DansoIcon,
+  geomungo: GeomungoIcon,
+};
+
+const InstrumentIcon = iconMap[track.fusion_instrument] || JanguIcon;
+const instrumentLabel = track.fusion_with_label || track.fusion_with;
 ---
 
-<section style="padding: 56px 24px 48px; max-width: 760px; margin: 0 auto;">
-  <div class="tag" style="margin-bottom: 20px;">latest drop / no. {track.number}</div>
-  <h1 class="serif" style="font-size: 36px; font-weight: 500; margin: 0 0 6px; line-height: 1.15;">
+<section style="position: relative; padding: 56px 24px 44px; max-width: 760px; margin: 0 auto;">
+  <div style="position: absolute; top: 30px; right: 18px; opacity: 0.85; pointer-events: none;">
+    <div class="fan-wrap">
+      <FanHero size={220} />
+    </div>
+  </div>
+
+  <div class="tag" style="margin-bottom: 24px;">
+    第 {track.number} 號 — LATEST DROP / NO. {track.number}
+  </div>
+
+  <h1
+    class="serif"
+    style="font-size: 48px; font-weight: 500; margin: 0 0 10px; line-height: 1.05; max-width: 480px;"
+  >
     <a href={`/track/${track.id}`}>{track.title_ko}</a>
   </h1>
-  <div class="muted" style="font-size: 16px; margin-bottom: 24px;">{track.title_en}</div>
-  <div class="mono muted" style="font-size: 14px; margin-bottom: 28px;">
-    {track.genre}<span class="fusion-op">⊗</span>{track.fusion_with}
+
+  <div
+    style="font-style: italic; font-size: 15px; color: var(--color-ink-soft); margin-bottom: 28px; max-width: 360px;"
+  >
+    {track.title_en}
   </div>
-  <button data-track={trackJson} style="display: inline-flex; align-items: center; gap: 8px;">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
-      ><path d="M8 5v14l11-7z"></path></svg
-    >
-    Play · {track.duration_label}
-  </button>
+
+  <div
+    class="mono"
+    style="display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--color-ink-soft); margin-bottom: 28px;"
+  >
+    <InstrumentIcon size={22} />
+    <span class="serif" style="font-size: 14px; letter-spacing: 0;">{instrumentLabel}</span>
+    <span class="fusion-op">⊗</span>
+    <span>{track.genre}</span>
+  </div>
+
+  <button data-track={trackJson}>▶ PLAY · {track.duration_label}</button>
 </section>
+
+<style>
+  @media (max-width: 540px) {
+    .fan-wrap {
+      transform: scale(0.6);
+      transform-origin: top right;
+      opacity: 0.5;
+    }
+  }
+</style>

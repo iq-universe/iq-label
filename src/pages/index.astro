@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import TrackHero from '../components/TrackHero.astro';
 import GenreGrid from '../components/GenreGrid.astro';
+import Stamp from '../components/Stamp.astro';
 import tracksData from '../data/tracks.json';
 import genresData from '../data/genres.json';
 import type { Track, Genre } from '../types';
@@ -9,7 +10,6 @@ import type { Track, Genre } from '../types';
 const tracks = tracksData as Track[];
 const genres = genresData as Genre[];
 
-// Latest track = last entry by published_at.
 const latest = [...tracks].sort((a, b) =>
   b.published_at.localeCompare(a.published_at),
 )[0];
@@ -18,4 +18,13 @@ const latest = [...tracks].sort((a, b) =>
 <Layout>
   {latest && <TrackHero track={latest} />}
   <GenreGrid genres={genres} />
+
+  <footer
+    style="max-width: 760px; margin: 48px auto 0; padding: 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--color-border);"
+  >
+    <div class="mono" style="font-size: 10px; color: var(--color-ink-faded); letter-spacing: 0.12em;">
+      EST. 2026 · SEOUL
+    </div>
+    <Stamp />
+  </footer>
 </Layout>
