@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GenreGrid from '../../components/GenreGrid.astro';
+import genresData from '../../data/genres.json';
+import type { Genre } from '../../types';
+
+const genres = genresData as Genre[];
+---
+
+<Layout title="Genres — iq-label">
+  <div style="max-width: 760px; margin: 0 auto; padding: 56px 0 0;">
+    <div style="padding: 0 24px;">
+      <div class="tag" style="margin-bottom: 12px;">all</div>
+      <h1 class="mono" style="font-size: 32px; font-weight: 500; margin: 0 0 8px;">genres</h1>
+      <p class="muted" style="margin: 0 0 28px;">
+        모든 트랙은 두 장르의 조합입니다.
+      </p>
+    </div>
+  </div>
+  <GenreGrid genres={genres} />
+</Layout>

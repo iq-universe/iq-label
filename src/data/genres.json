@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "boom-bap",
+    "label": "boom-bap",
+    "track_count": 1,
+    "status": "active"
+  },
+  {
+    "slug": "funky",
+    "label": "funky",
+    "track_count": 0,
+    "status": "coming"
+  },
+  {
+    "slug": "jazz",
+    "label": "jazz",
+    "track_count": 0,
+    "status": "coming"
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "id": "boom-bap-001",
+    "number": "001",
+    "title_ko": "출퇴근의 무게",
+    "title_en": "Weight of the commute",
+    "genre": "boom-bap",
+    "fusion_with": "pansori",
+    "duration_sec": 187,
+    "duration_label": "3:07",
+    "bpm": 88,
+    "key": "Cm",
+    "mood_tags": ["nostalgic", "rainy", "introspective"],
+    "vibe_notes": "먹먹한 새벽 출근길에 걸어주는 위로 같은 곡. 판소리 보컬 샘플의 끝부분이 후렴 직전에 살짝 울리는 게 핵심. 47개 후보 중 이거 하나가 그 타이밍을 정확히 잡았다.",
+    "reference_artists": ["J Dilla", "Pete Rock"],
+    "generation": {
+      "tool": "suno-v4",
+      "candidate_count": 47,
+      "selected": 1
+    },
+    "audio_url": "/audio/boom-bap-001.mp3",
+    "license": "CC-BY-NC-4.0",
+    "published_at": "2026-05-12"
+  }
+]

@@ -1,0 +1,60 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import tracksData from '../../data/tracks.json';
+import genresData from '../../data/genres.json';
+import type { Track, Genre } from '../../types';
+
+export async function getStaticPaths() {
+  const genres = genresData as Genre[];
+  return genres.map((genre) => ({
+    params: { slug: genre.slug },
+    props: { genre },
+  }));
+}
+
+interface Props {
+  genre: Genre;
+}
+
+const { genre } = Astro.props;
+const tracks = (tracksData as Track[]).filter((t) => t.genre === genre.slug);
+---
+
+<Layout title={`${genre.label} — iq-label`}>
+  <div style="max-width: 760px; margin: 0 auto; padding: 56px 24px;">
+    <div class="tag" style="margin-bottom: 12px;">genre</div>
+    <h1 class="mono" style="font-size: 32px; font-weight: 500; margin: 0 0 28px;">
+      {genre.label}
+    </h1>
+
+    {
+      tracks.length === 0 ? (
+        <p class="muted">아직 트랙이 없습니다.</p>
+      ) : (
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          {tracks.map((track) => (
+            <a
+              href={`/track/${track.id}`}
+              style="display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--color-bg-card); border: 0.5px solid var(--color-border); border-radius: var(--radius-md);"
+            >
+              <span class="mono tertiary" style="font-size: 12px; min-width: 32px;">
+                {track.number}
+              </span>
+              <div style="flex: 1; min-width: 0;">
+                <div class="serif" style="font-size: 18px; font-weight: 500;">
+                  {track.title_ko}
+                </div>
+                <div class="mono tertiary" style="font-size: 11px; margin-top: 2px;">
+                  {track.genre} ⊗ {track.fusion_with}
+                </div>
+              </div>
+              <span class="mono tertiary" style="font-size: 12px;">
+                {track.duration_label}
+              </span>
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</Layout>

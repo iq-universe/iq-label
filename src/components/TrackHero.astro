@@ -1,0 +1,27 @@
+---
+import type { Track } from '../types';
+
+interface Props {
+  track: Track;
+}
+
+const { track } = Astro.props;
+const trackJson = JSON.stringify(track);
+---
+
+<section style="padding: 56px 24px 48px; max-width: 760px; margin: 0 auto;">
+  <div class="tag" style="margin-bottom: 20px;">latest drop / no. {track.number}</div>
+  <h1 class="serif" style="font-size: 36px; font-weight: 500; margin: 0 0 6px; line-height: 1.15;">
+    <a href={`/track/${track.id}`}>{track.title_ko}</a>
+  </h1>
+  <div class="muted" style="font-size: 16px; margin-bottom: 24px;">{track.title_en}</div>
+  <div class="mono muted" style="font-size: 14px; margin-bottom: 28px;">
+    {track.genre}<span class="fusion-op">⊗</span>{track.fusion_with}
+  </div>
+  <button data-track={trackJson} style="display: inline-flex; align-items: center; gap: 8px;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
+      ><path d="M8 5v14l11-7z"></path></svg
+    >
+    Play · {track.duration_label}
+  </button>
+</section>

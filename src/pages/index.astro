@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrackHero from '../components/TrackHero.astro';
+import GenreGrid from '../components/GenreGrid.astro';
+import tracksData from '../data/tracks.json';
+import genresData from '../data/genres.json';
+import type { Track, Genre } from '../types';
+
+const tracks = tracksData as Track[];
+const genres = genresData as Genre[];
+
+// Latest track = last entry by published_at.
+const latest = [...tracks].sort((a, b) =>
+  b.published_at.localeCompare(a.published_at),
+)[0];
+---
+
+<Layout>
+  {latest && <TrackHero track={latest} />}
+  <GenreGrid genres={genres} />
+</Layout>

@@ -1,0 +1,123 @@
+---
+// Fixed bottom audio player. Tracks load via window.iqLabelPlayer.load(track).
+---
+
+<div
+  id="player"
+  style="position: fixed; left: 0; right: 0; bottom: 0; background: var(--color-bg-tertiary); border-top: 0.5px solid var(--color-border); padding: 12px 24px; display: flex; align-items: center; gap: 14px; z-index: 100;"
+>
+  <button
+    id="player-play"
+    aria-label="Play / Pause"
+    style="background: transparent; border: none; padding: 0; color: var(--color-text-secondary); cursor: pointer; display: flex; align-items: center;"
+  >
+    <svg id="player-icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+      ><path d="M8 5v14l11-7z"></path></svg
+    >
+    <svg
+      id="player-icon-pause"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      style="display: none;"
+      ><path d="M6 5h4v14H6zM14 5h4v14h-4z"></path></svg
+    >
+  </button>
+  <div style="flex: 1; min-width: 0;">
+    <div id="player-title" style="font-size: 13px; font-weight: 500; color: var(--color-text-primary);">
+      —
+    </div>
+    <div
+      id="player-meta"
+      style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary);"
+    >
+      no track loaded
+    </div>
+  </div>
+  <div
+    id="player-track"
+    style="flex: 2; height: 4px; background: var(--color-border); border-radius: 2px; position: relative; min-width: 80px; cursor: pointer;"
+  >
+    <div
+      id="player-progress"
+      style="position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: var(--color-text-secondary); border-radius: 2px;"
+    >
+    </div>
+  </div>
+  <div
+    id="player-time"
+    style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-secondary); white-space: nowrap;"
+  >
+    0:00 / 0:00
+  </div>
+  <audio id="player-audio" preload="metadata"></audio>
+</div>
+
+<script is:inline>
+  (function () {
+    const audio = document.getElementById('player-audio');
+    const playBtn = document.getElementById('player-play');
+    const iconPlay = document.getElementById('player-icon-play');
+    const iconPause = document.getElementById('player-icon-pause');
+    const progress = document.getElementById('player-progress');
+    const trackBar = document.getElementById('player-track');
+    const time = document.getElementById('player-time');
+    const titleEl = document.getElementById('player-title');
+    const metaEl = document.getElementById('player-meta');
+
+    const fmt = (s) => {
+      if (!isFinite(s)) return '0:00';
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60).toString().padStart(2, '0');
+      return m + ':' + sec;
+    };
+
+    const setIcon = (playing) => {
+      iconPlay.style.display = playing ? 'none' : 'block';
+      iconPause.style.display = playing ? 'block' : 'none';
+    };
+
+    playBtn.addEventListener('click', () => {
+      if (!audio.src) return;
+      audio.paused ? audio.play() : audio.pause();
+    });
+
+    audio.addEventListener('play', () => setIcon(true));
+    audio.addEventListener('pause', () => setIcon(false));
+
+    audio.addEventListener('timeupdate', () => {
+      const pct = (audio.currentTime / audio.duration) * 100 || 0;
+      progress.style.width = pct + '%';
+      time.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+    });
+
+    trackBar.addEventListener('click', (e) => {
+      if (!audio.duration) return;
+      const rect = trackBar.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = pct * audio.duration;
+    });
+
+    window.iqLabelPlayer = {
+      load(track) {
+        audio.src = track.audio_url;
+        titleEl.textContent = track.title_ko;
+        metaEl.textContent = track.genre + ' \u2297 ' + track.fusion_with;
+        audio.play().catch(() => {});
+      },
+    };
+
+    // Wire up any [data-track] buttons on the page.
+    document.querySelectorAll('[data-track]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        try {
+          const t = JSON.parse(btn.getAttribute('data-track'));
+          window.iqLabelPlayer.load(t);
+        } catch (e) {
+          console.error('Bad track data', e);
+        }
+      });
+    });
+  })();
+</script>

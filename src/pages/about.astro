@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const universe = [
+  { label: 'IQ Lab Blog', url: 'https://iq-proof.github.io', desc: '딥다이브 발행 허브' },
+  { label: 'IQ Dev Lab', url: 'https://iq-dev-lab.github.io', desc: '백엔드 deep-dive' },
+  { label: 'IQ AI Lab', url: 'https://iq-ai-lab.github.io', desc: 'AI 이론 deep-dive' },
+  { label: 'IQ Agent Lab', url: 'https://iq-agent-lab.github.io', desc: '에이전트 자동화 인프라' },
+];
+---
+
+<Layout title="About — iq-label">
+  <div style="max-width: 680px; margin: 0 auto; padding: 56px 24px;">
+    <div class="tag" style="margin-bottom: 12px;">about</div>
+    <h1 class="serif" style="font-size: 32px; font-weight: 500; margin: 0 0 32px; line-height: 1.2;">
+      IQ Universe
+    </h1>
+
+    <p class="muted">iq-label은 IQ Universe의 발행처 중 하나입니다.</p>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 32px;">
+      {
+        universe.map((site) => (
+          <a
+            href={site.url}
+            style="display: flex; flex-direction: column; padding: 16px; background: var(--color-bg-card); border: 0.5px solid var(--color-border); border-radius: var(--radius-md);"
+          >
+            <div class="mono" style="font-size: 13px; font-weight: 500;">
+              {site.label}
+            </div>
+            <div class="tertiary" style="font-size: 12px; margin-top: 2px;">
+              {site.desc}
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,16 @@
+---
+interface Props {
+  notes: string;
+}
+
+const { notes } = Astro.props;
+---
+
+<div
+  style="padding: 22px 28px; border-top: 0.5px solid var(--color-border); background: var(--color-bg-card);"
+>
+  <div class="tag" style="margin-bottom: 10px;">vibe notes</div>
+  <p style="margin: 0; font-size: 15px; line-height: 1.7; color: var(--color-text-primary);">
+    {notes}
+  </p>
+</div>

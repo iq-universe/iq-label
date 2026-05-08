@@ -1,0 +1,44 @@
+---
+// Static SVG waveform. Phase 2: generate per-track from ffmpeg peaks at build time.
+// For now, renders a pseudo-random waveform seeded by track id.
+
+interface Props {
+  trackId: string;
+  bars?: number;
+}
+
+const { trackId, bars = 50 } = Astro.props;
+
+// Deterministic pseudo-random based on track id so waveform is stable.
+function seededRandom(seed: string, i: number): number {
+  let h = 0;
+  const s = seed + ':' + i;
+  for (let j = 0; j < s.length; j++) {
+    h = (h * 31 + s.charCodeAt(j)) | 0;
+  }
+  return Math.abs(Math.sin(h)) % 1;
+}
+
+const heights = Array.from({ length: bars }, (_, i) => {
+  const r = seededRandom(trackId, i);
+  return Math.round(8 + r * 36);
+});
+const playedRatio = 0.45;
+---
+
+<div style="color: var(--color-text-primary);">
+  <svg width="100%" height="56" viewBox={`0 0 ${bars * 12} 56`} preserveAspectRatio="none">
+    {
+      heights.map((h, i) => (
+        <rect
+          x={i * 12}
+          y={(56 - h) / 2}
+          width="6"
+          height={h}
+          fill="currentColor"
+          opacity={i / bars < playedRatio ? 0.7 : 0.25}
+        />
+      ))
+    }
+  </svg>
+</div>
