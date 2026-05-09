@@ -1,0 +1,137 @@
+---
+interface Props {
+  size?: number;
+}
+
+const { size = 380 } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size * 0.65}
+  viewBox="0 0 400 260"
+  fill="none"
+  aria-label="텐서 곱 — 조합 공간"
+  role="img"
+  style="filter: drop-shadow(0 0 24px rgba(232, 72, 82, 0.08));"
+>
+  <!-- Sparse decorative stars in surrounding space -->
+  <g fill="#F2EAD8" opacity="0.32">
+    <circle cx="50" cy="40" r="0.9" />
+    <circle cx="370" cy="48" r="0.8" />
+    <circle cx="380" cy="200" r="0.9" />
+    <circle cx="22" cy="180" r="0.8" />
+    <circle cx="350" cy="232" r="0.7" />
+    <circle cx="78" cy="232" r="0.7" />
+    <circle cx="155" cy="30" r="0.6" />
+    <circle cx="245" cy="240" r="0.6" />
+  </g>
+
+  <!-- Concentric orbital ellipses -->
+  <g fill="none" stroke="#F2EAD8" stroke-linecap="round">
+    <ellipse cx="200" cy="130" rx="50" ry="35" stroke-width="0.5" opacity="0.45" />
+    <ellipse
+      cx="200"
+      cy="130"
+      rx="90"
+      ry="62"
+      stroke-width="0.4"
+      opacity="0.35"
+      stroke-dasharray="2 4"
+    />
+    <ellipse
+      cx="200"
+      cy="130"
+      rx="130"
+      ry="88"
+      stroke-width="0.35"
+      opacity="0.22"
+      stroke-dasharray="1 6"
+    />
+  </g>
+
+  <!-- 6 radial axes (faint, suggesting the 6 modern genres) -->
+  <g stroke="#F2EAD8" stroke-width="0.35" opacity="0.4" stroke-linecap="round">
+    <line x1="200" y1="130" x2="200" y2="42" />
+    <line x1="200" y1="130" x2="313" y2="86" />
+    <line x1="200" y1="130" x2="313" y2="174" />
+    <line x1="200" y1="130" x2="200" y2="218" />
+    <line x1="200" y1="130" x2="87" y2="174" />
+    <line x1="200" y1="130" x2="87" y2="86" />
+  </g>
+
+  <!-- Inner ring lattice nodes (6 points, radius 50/35) -->
+  <g fill="#F2EAD8" opacity="0.55">
+    <circle cx="200" cy="95" r="1.4" />
+    <circle cx="243" cy="112" r="1.4" />
+    <circle cx="243" cy="148" r="1.4" />
+    <circle cx="200" cy="165" r="1.4" />
+    <circle cx="157" cy="148" r="1.4" />
+    <circle cx="157" cy="112" r="1.4" />
+  </g>
+
+  <!-- Middle ring lattice nodes (6 points, radius 90/62) -->
+  <!-- Note: the (278, 99) position is the ACTIVE node — see below, rendered separately -->
+  <g fill="#F2EAD8" opacity="0.5">
+    <circle cx="200" cy="68" r="1.5" />
+    <!-- (278, 99) reserved for active node -->
+    <circle cx="278" cy="161" r="1.5" />
+    <circle cx="200" cy="192" r="1.5" />
+    <circle cx="122" cy="161" r="1.5" />
+    <circle cx="122" cy="99" r="1.5" />
+  </g>
+
+  <!-- Outer ring lattice nodes (6 points, radius 130/88) -->
+  <g fill="#F2EAD8" opacity="0.4">
+    <circle cx="200" cy="42" r="1.2" />
+    <circle cx="313" cy="86" r="1.2" />
+    <circle cx="313" cy="174" r="1.2" />
+    <circle cx="200" cy="218" r="1.2" />
+    <circle cx="87" cy="174" r="1.2" />
+    <circle cx="87" cy="86" r="1.2" />
+  </g>
+
+  <!-- Active combination: connecting line + glowing red node -->
+  <line
+    x1="200"
+    y1="130"
+    x2="278"
+    y2="99"
+    stroke="#E84852"
+    stroke-width="0.7"
+    opacity="0.55"
+    stroke-linecap="round"
+  />
+
+  <!-- Active node halo (faint outer glow ring) -->
+  <circle cx="278" cy="99" r="8" fill="none" stroke="#E84852" stroke-width="0.4" opacity="0.4">
+    <animate attributeName="r" values="6;10;6" dur="2.8s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.5;0.15;0.5" dur="2.8s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Active node core -->
+  <circle
+    cx="278"
+    cy="99"
+    r="3.5"
+    fill="#E84852"
+    style="filter: drop-shadow(0 0 14px rgba(232, 72, 82, 0.9));"
+  >
+    <animate attributeName="r" values="3.2;4.2;3.2" dur="2.8s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Center: large glowing ⊗ -->
+  <text
+    x="200"
+    y="148"
+    text-anchor="middle"
+    font-family="'Gowun Batang', 'Noto Serif KR', serif"
+    font-size="46"
+    fill="#E84852"
+    font-weight="500"
+    style="filter: drop-shadow(0 0 18px rgba(232, 72, 82, 0.7));"
+  >
+    ⊗
+    <animate attributeName="opacity" values="0.85;1;0.85" dur="3.5s" repeatCount="indefinite" />
+  </text>
+</svg>

@@ -20,8 +20,11 @@ const latest = [...tracks].sort((a, b) =>
   b.published_at.localeCompare(a.published_at),
 )[0];
 
-// Currently we focus on the active region (East Asia)
-const activeRegion = regions.find((r) => r.active);
+// Find first region that has any tracks (active focus area)
+const focusRegion =
+  regions.find((r) =>
+    r.instruments.some((i) => tracks.some((t) => t.fusion_instrument === i.id)),
+  ) || regions[0];
 
 const iconMap: Record<string, any> = {
   janggu: JanguIcon,
@@ -32,18 +35,20 @@ const iconMap: Record<string, any> = {
   geomungo: GeomungoIcon,
 };
 
-const instruments = activeRegion
-  ? activeRegion.instruments.map((inst) => {
-      const track = tracks.find(
-        (t) => t.fusion_instrument === inst.id && t.genre === inst.default_genre,
-      );
-      return { ...inst, track };
-    })
-  : [];
+// Track-driven instrument status: find ANY track for this instrument
+const instruments = focusRegion.instruments.map((inst) => {
+  const matchingTracks = tracks.filter((t) => t.fusion_instrument === inst.id);
+  const track = matchingTracks[0];
+  return {
+    ...inst,
+    track,
+    track_count: matchingTracks.length,
+    // Display the actual track's genre when a track exists, else default
+    display_genre: track ? track.genre : inst.default_genre,
+  };
+});
 
-const totalTracks = activeRegion
-  ? activeRegion.instruments.reduce((sum, i) => sum + i.track_count, 0)
-  : 0;
+const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
 ---
 
 <Layout>
@@ -53,17 +58,17 @@ const totalTracks = activeRegion
     <div class="section-header">
       <div class="tag">CURRENT · 현재 카탈로그</div>
       <div class="region-line">
-        <span class="region-en">{activeRegion?.label}</span>
+        <span class="region-en">{focusRegion.label}</span>
         <span class="region-dot">·</span>
-        <span class="region-ko">{activeRegion?.label_ko}</span>
+        <span class="region-ko">{focusRegion.label_ko}</span>
         <span class="region-flags">
-          {activeRegion?.flag_codes.map((code) => (
+          {focusRegion.flag_codes.map((code) => (
             <span class="flag" title={countryNamesKo[code] || code}>{countryToFlag(code)}</span>
           ))}
         </span>
       </div>
       <p class="meta-line">
-        {activeRegion?.instruments.length} instruments
+        {focusRegion.instruments.length} instruments
         <span class="meta-sep">·</span>
         <span class="active-meta">{totalTracks} track active</span>
       </p>
@@ -90,7 +95,7 @@ const totalTracks = activeRegion
             </div>
             <div class="genre-line">
               <span class="fusion-op">⊗</span>
-              <span class="genre-name">{inst.default_genre}</span>
+              <span class="genre-name">{inst.display_genre}</span>
               <span class="track-status">
                 {inst.track ? `· ${inst.track_count} track` : '· soon'}
               </span>
@@ -115,9 +120,7 @@ const totalTracks = activeRegion
     </div>
   </section>
 
-  <footer
-    class="page-footer"
-  >
+  <footer class="page-footer">
     <div class="footer-meta">
       EST. 2026 · SEOUL · COSMOS
     </div>
