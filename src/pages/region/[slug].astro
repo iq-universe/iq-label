@@ -1,0 +1,274 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import regionsData from '../../data/regions.json';
+import tracksData from '../../data/tracks.json';
+import type { Track } from '../../types';
+
+export async function getStaticPaths() {
+  return regionsData.map((region) => ({
+    params: { slug: region.slug },
+    props: { region }
+  }));
+}
+
+const { region } = Astro.props;
+const tracks = tracksData as Track[];
+
+// Each instrument: find a track if one exists for that instrument
+const instrumentsWithTracks = region.instruments.map((inst) => {
+  const track = tracks.find(
+    (t) => t.fusion_instrument === inst.id && t.genre === inst.default_genre,
+  );
+  return { ...inst, track };
+});
+---
+
+<Layout title={`${region.label} · Label Q`}>
+  <article class="region-page">
+
+    <header class="page-header">
+      <a href="/genres" class="back-link">← Atlas</a>
+      <div class="tag">REGION {region.number} · 지역</div>
+      <h1 class="serif glow-cream">
+        <span class="region-en">{region.label}</span>
+        <span class="region-ko">{region.label_ko}</span>
+      </h1>
+      <p class="subtitle">{region.blurb}</p>
+      <div class="region-meta">
+        <span>{region.instruments.length} instruments</span>
+        <span class="meta-sep">·</span>
+        <span>{instrumentsWithTracks.filter(i => i.track).length} active</span>
+      </div>
+    </header>
+
+    <div class="instrument-grid">
+      {instrumentsWithTracks.map((inst) => {
+        const cardContent = (
+          <Fragment>
+            <div class="instr-name-block">
+              {inst.label_ko && <div class="instr-ko">{inst.label_ko}</div>}
+              <div class={inst.label_ko ? 'instr-en-small' : 'instr-en-main'}>{inst.label_en}</div>
+            </div>
+            <div class="genre-line">
+              <span class="fusion-op">⊗</span>
+              <span class="genre-name">{inst.default_genre}</span>
+              <span class="track-status">
+                {inst.track ? `· ${inst.track_count} track` : '· soon'}
+              </span>
+            </div>
+            {inst.track && <div class="active-dot" aria-hidden="true"></div>}
+          </Fragment>
+        );
+
+        return inst.track ? (
+          <a href={`/track/${inst.track.id}`} class="instr-card instr-active">
+            {cardContent}
+          </a>
+        ) : (
+          <div class="instr-card instr-coming">
+            {cardContent}
+          </div>
+        );
+      })}
+    </div>
+
+  </article>
+</Layout>
+
+<style>
+  .region-page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-header {
+    margin-bottom: 56px;
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-faded);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: inline-block;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--color-dancheong-red);
+  }
+
+  .page-header .tag {
+    margin-bottom: 16px;
+  }
+
+  .page-header h1 {
+    margin: 0 0 22px;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .region-en {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.04em;
+  }
+
+  .region-ko {
+    font-size: 56px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--color-text-primary);
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 580px;
+    margin: 0 0 18px;
+  }
+
+  .region-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-faded);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .meta-sep {
+    color: var(--color-text-dim);
+  }
+
+  .instrument-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+  }
+
+  .instr-card {
+    position: relative;
+    padding: 22px 20px 18px;
+    border: 0.5px solid var(--color-border);
+    background: rgba(22, 18, 31, 0.5);
+    backdrop-filter: blur(4px);
+    transition: all 0.2s;
+    display: block;
+  }
+
+  .instr-active {
+    border-color: var(--color-border-strong);
+    background: rgba(22, 18, 31, 0.7);
+    cursor: pointer;
+  }
+
+  .instr-active:hover {
+    border-color: var(--color-dancheong-red);
+    box-shadow: 0 0 24px rgba(232, 72, 82, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .instr-coming {
+    opacity: 0.55;
+  }
+
+  .instr-name-block {
+    margin-bottom: 14px;
+  }
+
+  .instr-ko {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    color: var(--color-text-primary);
+    line-height: 1.2;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .instr-en-small {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-faded);
+    letter-spacing: 0.08em;
+  }
+
+  .instr-en-main {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--color-text-primary);
+    line-height: 1.2;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .genre-line {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.04em;
+    padding-top: 12px;
+    border-top: 0.5px solid var(--color-border);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .fusion-op {
+    color: var(--color-dancheong-red);
+    font-family: var(--font-serif);
+    font-size: 14px;
+    text-shadow: 0 0 8px rgba(232, 72, 82, 0.4);
+  }
+
+  .genre-name {
+    color: var(--color-text-primary);
+  }
+
+  .instr-active .track-status {
+    color: var(--color-dancheong-red);
+  }
+
+  .track-status {
+    color: var(--color-text-faded);
+  }
+
+  .active-dot {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-dancheong-red);
+    box-shadow: 0 0 12px rgba(232, 72, 82, 0.7);
+  }
+
+  @media (max-width: 540px) {
+    .region-page {
+      padding: 40px 20px 60px;
+    }
+    .region-ko {
+      font-size: 40px;
+    }
+    .region-en {
+      font-size: 18px;
+    }
+    .instrument-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

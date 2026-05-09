@@ -1,26 +1,204 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import GenreGrid from '../../components/GenreGrid.astro';
-import genresData from '../../data/genres.json';
-import type { Genre } from '../../types';
+import regionsData from '../../data/regions.json';
 
-const genres = genresData as Genre[];
+const regions = regionsData;
 ---
 
-<Layout title="Genres — Label Q">
-  <div style="max-width: 760px; margin: 0 auto; padding: 56px 24px 0;">
-    <div class="tag" style="margin-bottom: 12px;">ALL GENRES / 전체 장르</div>
-    <h1
-      class="serif glow-cream"
-      style="font-size: 38px; font-weight: 500; margin: 0 0 8px; line-height: 1.05;"
-    >
-      장르 목록
-    </h1>
-    <p
-      style="margin: 0 0 28px; color: var(--color-text-secondary); font-style: italic; font-size: 15px;"
-    >
-      모든 트랙은 한국 전통악기와 현대 장르의 조합입니다.
-    </p>
-  </div>
-  <GenreGrid genres={genres} showHeading={false} />
+<Layout title="Atlas · Label Q">
+  <article class="atlas">
+
+    <header class="page-header">
+      <div class="tag">ATLAS · 지역</div>
+      <h1 class="serif glow-cream">지역 / Regions</h1>
+      <p class="subtitle">
+        세계 8개 지역의 전통악기들. 각 지역에서 어떤 악기가 어떤 장르와 만나고 있는지.
+      </p>
+    </header>
+
+    <div class="region-grid">
+      {regions.map((region) => {
+        const totalTracks = region.instruments.reduce((sum, i) => sum + i.track_count, 0);
+        const cardContent = (
+          <Fragment>
+            <div class="region-num">{region.number}</div>
+            <div class="region-name-block">
+              <div class="region-label">{region.label}</div>
+              <div class="region-label-ko">{region.label_ko}</div>
+            </div>
+            <div class="region-blurb">{region.blurb}</div>
+            <div class="region-stats">
+              <span class="instr-count">{region.instruments.length} 악기</span>
+              <span class="dot-sep">·</span>
+              <span class="track-stat">
+                {region.active ? `${totalTracks} track` : 'soon'}
+              </span>
+            </div>
+            {region.active && <div class="active-dot" aria-hidden="true"></div>}
+          </Fragment>
+        );
+
+        return region.active ? (
+          <a href={`/region/${region.slug}`} class="region-card region-active">
+            {cardContent}
+          </a>
+        ) : (
+          <div class="region-card region-coming">
+            {cardContent}
+          </div>
+        );
+      })}
+    </div>
+
+  </article>
 </Layout>
+
+<style>
+  .atlas {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-header {
+    margin-bottom: 56px;
+  }
+
+  .page-header .tag {
+    margin-bottom: 16px;
+  }
+
+  .page-header h1 {
+    font-size: 56px;
+    font-weight: 500;
+    margin: 0 0 22px;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 580px;
+    margin: 0;
+  }
+
+  .region-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+  }
+
+  .region-card {
+    position: relative;
+    padding: 24px 22px 22px;
+    border: 0.5px solid var(--color-border);
+    background: rgba(22, 18, 31, 0.5);
+    backdrop-filter: blur(4px);
+    transition: all 0.2s;
+    display: block;
+  }
+
+  .region-active {
+    border-color: var(--color-border-strong);
+    background: rgba(22, 18, 31, 0.7);
+    cursor: pointer;
+  }
+
+  .region-active:hover {
+    border-color: var(--color-dancheong-red);
+    box-shadow: 0 0 28px rgba(232, 72, 82, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .region-coming {
+    opacity: 0.55;
+  }
+
+  .region-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-faded);
+    letter-spacing: 0.18em;
+    margin-bottom: 14px;
+  }
+
+  .region-name-block {
+    margin-bottom: 18px;
+  }
+
+  .region-label {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: var(--color-text-primary);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .region-label-ko {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--color-text-primary);
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  .region-active .region-label-ko {
+    color: var(--color-text-primary);
+  }
+
+  .region-blurb {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    margin-bottom: 18px;
+    min-height: 40px;
+  }
+
+  .region-stats {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--color-text-faded);
+    letter-spacing: 0.06em;
+    padding-top: 12px;
+    border-top: 0.5px solid var(--color-border);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .region-active .track-stat {
+    color: var(--color-dancheong-red);
+  }
+
+  .dot-sep {
+    color: var(--color-text-dim);
+  }
+
+  .active-dot {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-dancheong-red);
+    box-shadow: 0 0 12px rgba(232, 72, 82, 0.7);
+  }
+
+  @media (max-width: 540px) {
+    .atlas {
+      padding: 40px 20px 60px;
+    }
+    .page-header h1 {
+      font-size: 38px;
+    }
+    .region-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
