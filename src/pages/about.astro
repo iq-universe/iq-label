@@ -1,48 +1,353 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const universe = [
-  { label: 'IQ Lab Blog', url: 'https://iq-proof.github.io', desc: '딥다이브 발행 허브' },
-  { label: 'IQ Dev Lab', url: 'https://iq-dev-lab.github.io', desc: '백엔드 deep-dive' },
-  { label: 'IQ AI Lab', url: 'https://iq-ai-lab.github.io', desc: 'AI 이론 deep-dive' },
-  { label: 'IQ Agent Lab', url: 'https://iq-agent-lab.github.io', desc: '에이전트 자동화 인프라' },
-];
 ---
 
-<Layout title="About — Label Q">
-  <article style="max-width: 640px; margin: 0 auto; padding: 56px 24px;">
-    <div class="tag" style="margin-bottom: 12px;">ABOUT / 소개</div>
-    <h1
-      class="serif glow-cream"
-      style="font-size: 40px; font-weight: 500; margin: 0 0 12px; line-height: 1.15;"
-    >
-      IQ Universe
-    </h1>
-    <p
-      style="font-style: italic; font-size: 16px; color: var(--color-text-secondary); margin: 0 0 32px;"
-    >
-      Label Q는 IQ Universe의 발행처 중 하나입니다.
-    </p>
+<Layout title="About · Label Q">
+  <article class="about">
 
-    <div style="display: flex; flex-direction: column; border-top: 0.5px solid var(--color-border);">
-      {
-        universe.map((site) => (
-          <a
-            href={site.url}
-            style="display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 0.5px solid var(--color-border);"
-          >
-            <div>
-              <div class="serif" style="font-size: 18px; font-weight: 500; line-height: 1.3; color: var(--color-text-primary);">
-                {site.label}
-              </div>
-              <div class="mono" style="font-size: 11px; color: var(--color-text-faded); margin-top: 4px;">
-                {site.desc}
-              </div>
-            </div>
-            <span class="mono" style="font-size: 14px; color: var(--color-text-faded);">→</span>
-          </a>
-        ))
-      }
-    </div>
+    <section class="hero">
+      <div class="tag">ABOUT · 소개</div>
+      <h1 class="serif glow-cream">Label Q</h1>
+      <p class="subtitle">
+        한 사람 + AI가 운영하는 인디 레이블.<br/>
+        세계의 전통악기 × 현대 장르의 fusion 음악을 큐레이션해 발행한다.
+      </p>
+    </section>
+
+    <section class="block">
+      <div class="block-tag">◈ OPERATOR</div>
+      <dl class="info">
+        <dt>운영자</dt>
+        <dd><a href="https://github.com/e9ua1" target="_blank" rel="noopener">@e9ua1</a> · 아이큐 (IQ)</dd>
+
+        <dt>설립</dt>
+        <dd>2026 · Seoul · Cosmos</dd>
+
+        <dt>현재 카탈로그</dt>
+        <dd>1 track · <a href="/">전체 보기 →</a></dd>
+      </dl>
+    </section>
+
+    <section class="block">
+      <div class="block-tag">◈ LICENSE</div>
+
+      <p>모든 트랙은 <strong>Creative Commons BY-NC 4.0</strong>으로 발행됩니다.</p>
+
+      <ul class="license-list">
+        <li><span class="check">✓</span> 자유롭게 다운로드 · 복사 · 재생 가능</li>
+        <li><span class="check">✓</span> 비상업적 용도라면 자유롭게 사용 가능</li>
+        <li><span class="check">✓</span> 출처 (라벨 큐 / iq-label) 표기 필요</li>
+        <li><span class="x">✗</span> 상업적 사용은 별도 문의</li>
+      </ul>
+
+      <p>라벨 큐는 <em>판매 카탈로그</em>가 아니라 <strong>공공 음악 자원</strong>입니다.</p>
+      <p>카페 BGM, 개인 영상 BGM, 공부 음악, 게임 OST, 졸업영화 사운드트랙 — 모두 환영합니다. 출처만 표기하면 됩니다.</p>
+    </section>
+
+    <section class="block">
+      <div class="block-tag">◈ CONTACT</div>
+
+      <p>상업적 라이선스 (브랜드 광고 · 영리 OST 등) 또는 협업 문의:</p>
+
+      <ul class="contact-list">
+        <li>
+          <span class="contact-label">GitHub Org</span>
+          <a href="https://github.com/iq-label" target="_blank" rel="noopener">github.com/iq-label</a>
+        </li>
+        <li>
+          <span class="contact-label">Operator</span>
+          <a href="https://github.com/e9ua1" target="_blank" rel="noopener">github.com/e9ua1</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <div class="block-tag">◈ IQ UNIVERSE</div>
+
+      <p>라벨 큐는 <a href="https://github.com/e9ua1" target="_blank" rel="noopener">IQ Universe</a>의 일부입니다 — 한 운영자가 묻고 답하는 같은 우주의 다른 영역들.</p>
+
+      <ul class="universe-list">
+        <li>
+          <span class="universe-icon" aria-hidden="true">🛰</span>
+          <a href="https://iq-agent-lab.github.io" target="_blank" rel="noopener">iq-agent-lab</a>
+          <span class="universe-desc">— iq-composer (생성 도구)가 만들어진다</span>
+        </li>
+        <li>
+          <span class="universe-icon" aria-hidden="true">📜</span>
+          <a href="https://iq-proof.github.io" target="_blank" rel="noopener">iq-proof</a>
+          <span class="universe-desc">— 큐레이션 회고와 운영 메트릭이 발행된다</span>
+        </li>
+        <li>
+          <span class="universe-icon" aria-hidden="true">🔬</span>
+          <a href="https://iq-dev-lab.github.io" target="_blank" rel="noopener">iq-dev-lab</a>
+          <span class="universe-desc">— 백엔드 시스템 deep-dive</span>
+        </li>
+        <li>
+          <span class="universe-icon" aria-hidden="true">🧠</span>
+          <a href="https://iq-ai-lab.github.io" target="_blank" rel="noopener">iq-ai-lab</a>
+          <span class="universe-desc">— AI 수학적 본질 탐구</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <div class="block-tag">◈ READ MORE</div>
+      <a href="/manifesto" class="cta-link">MANIFESTO 읽기 →</a>
+    </section>
+
   </article>
 </Layout>
+
+<style>
+  .about {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero {
+    margin-bottom: 80px;
+  }
+
+  .hero .tag {
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-size: 56px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    margin: 0 0 22px;
+    line-height: 1.05;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    max-width: 540px;
+    margin: 0;
+  }
+
+  .block {
+    margin-bottom: 64px;
+  }
+
+  .block-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-dancheong-red);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 0.5px solid var(--color-border);
+  }
+
+  .block p {
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin: 0 0 18px;
+  }
+
+  .block p strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .block p em {
+    color: var(--color-stardust-gold);
+    font-style: italic;
+  }
+
+  .info {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 14px 24px;
+    margin: 0;
+  }
+
+  .info dt {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-faded);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-top: 2px;
+  }
+
+  .info dd {
+    margin: 0;
+    font-size: 15.5px;
+    color: var(--color-text-primary);
+  }
+
+  .info dd a {
+    color: var(--color-text-primary);
+    border-bottom: 0.5px solid var(--color-border-strong);
+    transition: all 0.2s;
+  }
+
+  .info dd a:hover {
+    color: var(--color-dancheong-red);
+    border-bottom-color: var(--color-dancheong-red);
+  }
+
+  .license-list {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+  }
+
+  .license-list li {
+    padding: 10px 0;
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .license-list .check {
+    color: var(--color-stardust-gold);
+    font-family: var(--font-mono);
+    font-size: 14px;
+  }
+
+  .license-list .x {
+    color: var(--color-dancheong-red);
+    font-family: var(--font-mono);
+    font-size: 14px;
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .contact-list li {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 24px;
+    padding: 14px 0;
+    border-bottom: 0.5px solid var(--color-border);
+    align-items: center;
+  }
+
+  .contact-list li:first-child {
+    border-top: 0.5px solid var(--color-border);
+  }
+
+  .contact-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-faded);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .contact-list a {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-text-primary);
+    border-bottom: 0.5px solid var(--color-border-strong);
+    transition: all 0.2s;
+  }
+
+  .contact-list a:hover {
+    color: var(--color-dancheong-red);
+    border-bottom-color: var(--color-dancheong-red);
+  }
+
+  .universe-list {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+  }
+
+  .universe-list li {
+    display: grid;
+    grid-template-columns: 30px auto 1fr;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 0.5px solid var(--color-border);
+    align-items: baseline;
+  }
+
+  .universe-list li:first-child {
+    border-top: 0.5px solid var(--color-border);
+  }
+
+  .universe-icon {
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .universe-list a {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-text-primary);
+    border-bottom: 0.5px solid var(--color-border-strong);
+    transition: all 0.2s;
+  }
+
+  .universe-list a:hover {
+    color: var(--color-dancheong-red);
+    border-bottom-color: var(--color-dancheong-red);
+  }
+
+  .universe-desc {
+    font-size: 13.5px;
+    color: var(--color-text-faded);
+    line-height: 1.6;
+  }
+
+  .cta-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-border-strong);
+    padding: 12px 24px;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .cta-link:hover {
+    color: var(--color-dancheong-red);
+    border-color: var(--color-dancheong-red);
+    box-shadow: 0 0 24px rgba(232, 72, 82, 0.15);
+  }
+
+  @media (max-width: 540px) {
+    .about {
+      padding: 40px 20px 60px;
+    }
+    .hero h1 {
+      font-size: 40px;
+    }
+    .subtitle {
+      font-size: 15.5px;
+    }
+    .info {
+      grid-template-columns: 100px 1fr;
+      gap: 10px 18px;
+    }
+    .contact-list li,
+    .universe-list li {
+      grid-template-columns: 100px 1fr;
+      gap: 14px;
+    }
+    .universe-list li {
+      grid-template-columns: 24px auto 1fr;
+    }
+    .universe-desc {
+      font-size: 12.5px;
+    }
+  }
+</style>
