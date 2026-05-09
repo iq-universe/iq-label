@@ -5,18 +5,19 @@
     "label": "East Asia",
     "label_ko": "동아시아",
     "blurb": "한반도, 일본, 중국의 전통악기들",
+    "flag_codes": ["KR", "JP", "CN"],
     "active": true,
     "instruments": [
-      { "id": "janggu", "label_ko": "장구", "label_en": "janggu", "default_genre": "boom-bap", "track_count": 1, "active": true },
-      { "id": "buk", "label_ko": "북", "label_en": "buk", "default_genre": "funky", "track_count": 0, "active": false },
-      { "id": "gayageum", "label_ko": "가야금", "label_en": "gayageum", "default_genre": "jazz", "track_count": 0, "active": false },
-      { "id": "haegeum", "label_ko": "해금", "label_en": "haegeum", "default_genre": "ambient", "track_count": 0, "active": false },
-      { "id": "danso", "label_ko": "단소", "label_en": "danso", "default_genre": "lo-fi", "track_count": 0, "active": false },
-      { "id": "geomungo", "label_ko": "거문고", "label_en": "geomungo", "default_genre": "experimental", "track_count": 0, "active": false },
-      { "id": "koto", "label_ko": null, "label_en": "koto", "default_genre": "jazz", "track_count": 0, "active": false },
-      { "id": "shakuhachi", "label_ko": null, "label_en": "shakuhachi", "default_genre": "lo-fi", "track_count": 0, "active": false },
-      { "id": "erhu", "label_ko": null, "label_en": "erhu", "default_genre": "ambient", "track_count": 0, "active": false },
-      { "id": "pipa", "label_ko": null, "label_en": "pipa", "default_genre": "experimental", "track_count": 0, "active": false }
+      { "id": "janggu", "label_ko": "장구", "label_en": "janggu", "country": "KR", "default_genre": "boom-bap", "track_count": 1, "active": true },
+      { "id": "buk", "label_ko": "북", "label_en": "buk", "country": "KR", "default_genre": "funky", "track_count": 0, "active": false },
+      { "id": "gayageum", "label_ko": "가야금", "label_en": "gayageum", "country": "KR", "default_genre": "jazz", "track_count": 0, "active": false },
+      { "id": "haegeum", "label_ko": "해금", "label_en": "haegeum", "country": "KR", "default_genre": "ambient", "track_count": 0, "active": false },
+      { "id": "danso", "label_ko": "단소", "label_en": "danso", "country": "KR", "default_genre": "lo-fi", "track_count": 0, "active": false },
+      { "id": "geomungo", "label_ko": "거문고", "label_en": "geomungo", "country": "KR", "default_genre": "experimental", "track_count": 0, "active": false },
+      { "id": "koto", "label_ko": null, "label_en": "koto", "country": "JP", "default_genre": "jazz", "track_count": 0, "active": false },
+      { "id": "shakuhachi", "label_ko": null, "label_en": "shakuhachi", "country": "JP", "default_genre": "lo-fi", "track_count": 0, "active": false },
+      { "id": "erhu", "label_ko": null, "label_en": "erhu", "country": "CN", "default_genre": "ambient", "track_count": 0, "active": false },
+      { "id": "pipa", "label_ko": null, "label_en": "pipa", "country": "CN", "default_genre": "experimental", "track_count": 0, "active": false }
     ]
   },
   {
@@ -25,14 +26,15 @@
     "label": "South Asia",
     "label_ko": "남아시아",
     "blurb": "인도 아대륙의 라가와 리듬",
+    "flag_codes": ["IN"],
     "active": false,
     "instruments": [
-      { "id": "sitar", "label_ko": null, "label_en": "sitar", "default_genre": "ambient", "track_count": 0, "active": false },
-      { "id": "tabla", "label_ko": null, "label_en": "tabla", "default_genre": "boom-bap", "track_count": 0, "active": false },
-      { "id": "sarod", "label_ko": null, "label_en": "sarod", "default_genre": "jazz", "track_count": 0, "active": false },
-      { "id": "tampura", "label_ko": null, "label_en": "tampura", "default_genre": "ambient", "track_count": 0, "active": false },
-      { "id": "santoor", "label_ko": null, "label_en": "santoor", "default_genre": "jazz", "track_count": 0, "active": false },
-      { "id": "sarangi", "label_ko": null, "label_en": "sarangi", "default_genre": "ambient", "track_count": 0, "active": false }
+      { "id": "sitar", "label_ko": null, "label_en": "sitar", "country": "IN", "default_genre": "ambient", "track_count": 0, "active": false },
+      { "id": "tabla", "label_ko": null, "label_en": "tabla", "country": "IN", "default_genre": "boom-bap", "track_count": 0, "active": false },
+      { "id": "sarod", "label_ko": null, "label_en": "sarod", "country": "IN", "default_genre": "jazz", "track_count": 0, "active": false },
+      { "id": "tampura", "label_ko": null, "label_en": "tampura", "country": "IN", "default_genre": "ambient", "track_count": 0, "active": false },
+      { "id": "santoor", "label_ko": null, "label_en": "santoor", "country": "IN", "default_genre": "jazz", "track_count": 0, "active": false },
+      { "id": "sarangi", "label_ko": null, "label_en": "sarangi", "country": "IN", "default_genre": "ambient", "track_count": 0, "active": false }
     ]
   },
   {
@@ -41,14 +43,15 @@
     "label": "West Asia",
     "label_ko": "서아시아",
     "blurb": "중동의 마캄과 미분음",
+    "flag_codes": ["EG", "IR", "TR", "AM"],
     "active": false,
     "instruments": [
-      { "id": "oud", "label_ko": null, "label_en": "oud", "default_genre": "jazz", "track_count": 0, "active": false },
-      { "id": "ney", "label_ko": null, "label_en": "ney", "default_genre": "lo-fi", "track_count": 0, "active": false },
-      { "id": "qanun", "label_ko": null, "label_en": "qanun", "default_genre": "jazz", "track_count": 0, "active": false },
-      { "id": "darbuka", "label_ko": null, "label_en": "darbuka", "default_genre": "boom-bap", "track_count": 0, "active": false },
-      { "id": "saz", "label_ko": null, "label_en": "saz", "default_genre": "jazz", "track_count": 0, "active": false },
-      { "id": "duduk", "label_ko": null, "label_en": "duduk", "default_genre": "ambient", "track_count": 0, "active": false }
+      { "id": "oud", "label_ko": null, "label_en": "oud", "country": "EG", "default_genre": "jazz", "track_count": 0, "active": false },
+      { "id": "ney", "label_ko": null, "label_en": "ney", "country": "IR", "default_genre": "lo-fi", "track_count": 0, "active": false },
+      { "id": "qanun", "label_ko": null, "label_en": "qanun", "country": "TR", "default_genre": "jazz", "track_count": 0, "active": false },
+      { "id": "darbuka", "label_ko": null, "label_en": "darbuka", "country": "EG", "default_genre": "boom-bap", "track_count": 0, "active": false },
+      { "id": "saz", "label_ko": null, "label_en": "saz", "country": "TR", "default_genre": "jazz", "track_count": 0, "active": false },
+      { "id": "duduk", "label_ko": null, "label_en": "duduk", "country": "AM", "default_genre": "ambient", "track_count": 0, "active": false }
     ]
   },
   {
@@ -57,14 +60,15 @@
     "label": "Africa",
     "label_ko": "아프리카",
     "blurb": "사하라 이남의 폴리리듬과 줄악기",
+    "flag_codes": ["SN", "ML", "ZW", "NG"],
     "active": false,
     "instruments": [
-      { "id": "kora", "label_ko": null, "label_en": "kora", "default_genre": "jazz", "track_count": 0, "active": false },
-      { "id": "djembe", "label_ko": null, "label_en": "djembe", "default_genre": "funky", "track_count": 0, "active": false },
-      { "id": "mbira", "label_ko": null, "label_en": "mbira", "default_genre": "experimental", "track_count": 0, "active": false },
-      { "id": "balafon", "label_ko": null, "label_en": "balafon", "default_genre": "experimental", "track_count": 0, "active": false },
-      { "id": "talking-drum", "label_ko": null, "label_en": "talking drum", "default_genre": "boom-bap", "track_count": 0, "active": false },
-      { "id": "ngoni", "label_ko": null, "label_en": "ngoni", "default_genre": "jazz", "track_count": 0, "active": false }
+      { "id": "kora", "label_ko": null, "label_en": "kora", "country": "SN", "default_genre": "jazz", "track_count": 0, "active": false },
+      { "id": "djembe", "label_ko": null, "label_en": "djembe", "country": "ML", "default_genre": "funky", "track_count": 0, "active": false },
+      { "id": "mbira", "label_ko": null, "label_en": "mbira", "country": "ZW", "default_genre": "experimental", "track_count": 0, "active": false },
+      { "id": "balafon", "label_ko": null, "label_en": "balafon", "country": "ML", "default_genre": "experimental", "track_count": 0, "active": false },
+      { "id": "talking-drum", "label_ko": null, "label_en": "talking drum", "country": "NG", "default_genre": "boom-bap", "track_count": 0, "active": false },
+      { "id": "ngoni", "label_ko": null, "label_en": "ngoni", "country": "ML", "default_genre": "jazz", "track_count": 0, "active": false }
     ]
   },
   {
@@ -73,13 +77,14 @@
     "label": "Europe",
     "label_ko": "유럽",
     "blurb": "유럽 민속의 드론과 즉흥",
+    "flag_codes": ["IE", "FR", "SE"],
     "active": false,
     "instruments": [
-      { "id": "bodhran", "label_ko": null, "label_en": "bodhrán", "default_genre": "boom-bap", "track_count": 0, "active": false },
-      { "id": "hurdy-gurdy", "label_ko": null, "label_en": "hurdy-gurdy", "default_genre": "experimental", "track_count": 0, "active": false },
-      { "id": "accordion", "label_ko": null, "label_en": "accordion", "default_genre": "funky", "track_count": 0, "active": false },
-      { "id": "uilleann-pipes", "label_ko": null, "label_en": "uilleann pipes", "default_genre": "ambient", "track_count": 0, "active": false },
-      { "id": "nyckelharpa", "label_ko": null, "label_en": "nyckelharpa", "default_genre": "jazz", "track_count": 0, "active": false }
+      { "id": "bodhran", "label_ko": null, "label_en": "bodhrán", "country": "IE", "default_genre": "boom-bap", "track_count": 0, "active": false },
+      { "id": "hurdy-gurdy", "label_ko": null, "label_en": "hurdy-gurdy", "country": "FR", "default_genre": "experimental", "track_count": 0, "active": false },
+      { "id": "accordion", "label_ko": null, "label_en": "accordion", "country": "FR", "default_genre": "funky", "track_count": 0, "active": false },
+      { "id": "uilleann-pipes", "label_ko": null, "label_en": "uilleann pipes", "country": "IE", "default_genre": "ambient", "track_count": 0, "active": false },
+      { "id": "nyckelharpa", "label_ko": null, "label_en": "nyckelharpa", "country": "SE", "default_genre": "jazz", "track_count": 0, "active": false }
     ]
   },
   {
@@ -88,14 +93,15 @@
     "label": "Americas",
     "label_ko": "아메리카",
     "blurb": "남북미의 줄과 타악",
+    "flag_codes": ["US", "BR", "PE", "TT"],
     "active": false,
     "instruments": [
-      { "id": "charango", "label_ko": null, "label_en": "charango", "default_genre": "jazz", "track_count": 0, "active": false },
-      { "id": "cajon", "label_ko": null, "label_en": "cajón", "default_genre": "boom-bap", "track_count": 0, "active": false },
-      { "id": "banjo", "label_ko": null, "label_en": "banjo", "default_genre": "funky", "track_count": 0, "active": false },
-      { "id": "steel-drum", "label_ko": null, "label_en": "steel drum", "default_genre": "funky", "track_count": 0, "active": false },
-      { "id": "native-flute", "label_ko": null, "label_en": "native flute", "default_genre": "lo-fi", "track_count": 0, "active": false },
-      { "id": "berimbau", "label_ko": null, "label_en": "berimbau", "default_genre": "experimental", "track_count": 0, "active": false }
+      { "id": "charango", "label_ko": null, "label_en": "charango", "country": "BO", "default_genre": "jazz", "track_count": 0, "active": false },
+      { "id": "cajon", "label_ko": null, "label_en": "cajón", "country": "PE", "default_genre": "boom-bap", "track_count": 0, "active": false },
+      { "id": "banjo", "label_ko": null, "label_en": "banjo", "country": "US", "default_genre": "funky", "track_count": 0, "active": false },
+      { "id": "steel-drum", "label_ko": null, "label_en": "steel drum", "country": "TT", "default_genre": "funky", "track_count": 0, "active": false },
+      { "id": "native-flute", "label_ko": null, "label_en": "native flute", "country": "US", "default_genre": "lo-fi", "track_count": 0, "active": false },
+      { "id": "berimbau", "label_ko": null, "label_en": "berimbau", "country": "BR", "default_genre": "experimental", "track_count": 0, "active": false }
     ]
   },
   {
@@ -104,11 +110,12 @@
     "label": "Oceania",
     "label_ko": "오세아니아",
     "blurb": "원주민의 드론과 타악",
+    "flag_codes": ["AU", "PG", "CK"],
     "active": false,
     "instruments": [
-      { "id": "didgeridoo", "label_ko": null, "label_en": "didgeridoo", "default_genre": "ambient", "track_count": 0, "active": false },
-      { "id": "slit-drum", "label_ko": null, "label_en": "slit drum", "default_genre": "boom-bap", "track_count": 0, "active": false },
-      { "id": "pate", "label_ko": null, "label_en": "pātē", "default_genre": "boom-bap", "track_count": 0, "active": false }
+      { "id": "didgeridoo", "label_ko": null, "label_en": "didgeridoo", "country": "AU", "default_genre": "ambient", "track_count": 0, "active": false },
+      { "id": "slit-drum", "label_ko": null, "label_en": "slit drum", "country": "PG", "default_genre": "boom-bap", "track_count": 0, "active": false },
+      { "id": "pate", "label_ko": null, "label_en": "pātē", "country": "CK", "default_genre": "boom-bap", "track_count": 0, "active": false }
     ]
   },
   {
@@ -117,12 +124,13 @@
     "label": "Global",
     "label_ko": "글로벌",
     "blurb": "지역 너머의 현대 악기들",
+    "flag_codes": ["CH", "US", "RU"],
     "active": false,
     "instruments": [
-      { "id": "hang", "label_ko": null, "label_en": "hang", "default_genre": "ambient", "track_count": 0, "active": false },
-      { "id": "glass-harmonica", "label_ko": null, "label_en": "glass harmonica", "default_genre": "ambient", "track_count": 0, "active": false },
-      { "id": "theremin", "label_ko": null, "label_en": "theremin", "default_genre": "experimental", "track_count": 0, "active": false },
-      { "id": "waterphone", "label_ko": null, "label_en": "waterphone", "default_genre": "experimental", "track_count": 0, "active": false }
+      { "id": "hang", "label_ko": null, "label_en": "hang", "country": "CH", "default_genre": "ambient", "track_count": 0, "active": false },
+      { "id": "glass-harmonica", "label_ko": null, "label_en": "glass harmonica", "country": "US", "default_genre": "ambient", "track_count": 0, "active": false },
+      { "id": "theremin", "label_ko": null, "label_en": "theremin", "country": "RU", "default_genre": "experimental", "track_count": 0, "active": false },
+      { "id": "waterphone", "label_ko": null, "label_en": "waterphone", "country": "US", "default_genre": "experimental", "track_count": 0, "active": false }
     ]
   }
 ]

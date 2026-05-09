@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import regionsData from '../../data/regions.json';
 import tracksData from '../../data/tracks.json';
+import { countryToFlag, countryNamesKo } from '../../lib/countries';
 import type { Track } from '../../types';
 
 export async function getStaticPaths() {
@@ -14,7 +15,6 @@ export async function getStaticPaths() {
 const { region } = Astro.props;
 const tracks = tracksData as Track[];
 
-// Each instrument: find a track if one exists for that instrument
 const instrumentsWithTracks = region.instruments.map((inst) => {
   const track = tracks.find(
     (t) => t.fusion_instrument === inst.id && t.genre === inst.default_genre,
@@ -33,6 +33,11 @@ const instrumentsWithTracks = region.instruments.map((inst) => {
         <span class="region-en">{region.label}</span>
         <span class="region-ko">{region.label_ko}</span>
       </h1>
+      <div class="region-flags">
+        {region.flag_codes.map((code) => (
+          <span class="flag" title={countryNamesKo[code] || code}>{countryToFlag(code)}</span>
+        ))}
+      </div>
       <p class="subtitle">{region.blurb}</p>
       <div class="region-meta">
         <span>{region.instruments.length} instruments</span>
@@ -43,8 +48,13 @@ const instrumentsWithTracks = region.instruments.map((inst) => {
 
     <div class="instrument-grid">
       {instrumentsWithTracks.map((inst) => {
+        const flagEmoji = countryToFlag(inst.country);
         const cardContent = (
           <Fragment>
+            <div class="card-top">
+              <span class="flag" title={countryNamesKo[inst.country] || inst.country}>{flagEmoji}</span>
+              {inst.track && <div class="active-dot" aria-hidden="true"></div>}
+            </div>
             <div class="instr-name-block">
               {inst.label_ko && <div class="instr-ko">{inst.label_ko}</div>}
               <div class={inst.label_ko ? 'instr-en-small' : 'instr-en-main'}>{inst.label_en}</div>
@@ -56,7 +66,6 @@ const instrumentsWithTracks = region.instruments.map((inst) => {
                 {inst.track ? `· ${inst.track_count} track` : '· soon'}
               </span>
             </div>
-            {inst.track && <div class="active-dot" aria-hidden="true"></div>}
           </Fragment>
         );
 
@@ -108,7 +117,7 @@ const instrumentsWithTracks = region.instruments.map((inst) => {
   }
 
   .page-header h1 {
-    margin: 0 0 22px;
+    margin: 0 0 16px;
     line-height: 1;
     display: flex;
     align-items: baseline;
@@ -129,6 +138,15 @@ const instrumentsWithTracks = region.instruments.map((inst) => {
     font-weight: 500;
     letter-spacing: -0.015em;
     color: var(--color-text-primary);
+  }
+
+  .region-flags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+    font-size: 22px;
+    line-height: 1;
+    filter: saturate(0.9);
   }
 
   .subtitle {
@@ -162,7 +180,7 @@ const instrumentsWithTracks = region.instruments.map((inst) => {
 
   .instr-card {
     position: relative;
-    padding: 22px 20px 18px;
+    padding: 18px 20px 18px;
     border: 0.5px solid var(--color-border);
     background: rgba(22, 18, 31, 0.5);
     backdrop-filter: blur(4px);
@@ -184,6 +202,20 @@ const instrumentsWithTracks = region.instruments.map((inst) => {
 
   .instr-coming {
     opacity: 0.55;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    height: 22px;
+  }
+
+  .card-top .flag {
+    font-size: 20px;
+    line-height: 1;
+    filter: saturate(0.9);
   }
 
   .instr-name-block {
@@ -247,9 +279,6 @@ const instrumentsWithTracks = region.instruments.map((inst) => {
   }
 
   .active-dot {
-    position: absolute;
-    top: 20px;
-    right: 20px;
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -265,6 +294,9 @@ const instrumentsWithTracks = region.instruments.map((inst) => {
       font-size: 40px;
     }
     .region-en {
+      font-size: 18px;
+    }
+    .region-flags {
       font-size: 18px;
     }
     .instrument-grid {

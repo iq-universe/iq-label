@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import regionsData from '../../data/regions.json';
+import { countryToFlag, countryNamesKo } from '../../lib/countries';
 
 const regions = regionsData;
 ---
@@ -27,6 +28,11 @@ const regions = regionsData;
               <div class="region-label-ko">{region.label_ko}</div>
             </div>
             <div class="region-blurb">{region.blurb}</div>
+            <div class="region-flags">
+              {region.flag_codes.map((code) => (
+                <span class="flag" title={countryNamesKo[code] || code}>{countryToFlag(code)}</span>
+              ))}
+            </div>
             <div class="region-stats">
               <span class="instr-count">{region.instruments.length} 악기</span>
               <span class="dot-sep">·</span>
@@ -147,16 +153,25 @@ const regions = regionsData;
     font-weight: 500;
   }
 
-  .region-active .region-label-ko {
-    color: var(--color-text-primary);
-  }
-
   .region-blurb {
     font-size: 13px;
     color: var(--color-text-secondary);
     line-height: 1.55;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
     min-height: 40px;
+  }
+
+  .region-flags {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+    font-size: 18px;
+    line-height: 1;
+    filter: saturate(0.85);
+  }
+
+  .region-flags .flag {
+    cursor: default;
   }
 
   .region-stats {

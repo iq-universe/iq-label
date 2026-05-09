@@ -1,30 +1,388 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import TrackHero from '../components/TrackHero.astro';
-import GenreGrid from '../components/GenreGrid.astro';
 import Stamp from '../components/Stamp.astro';
+import JanguIcon from '../components/icons/JanguIcon.astro';
+import BukIcon from '../components/icons/BukIcon.astro';
+import GayageumIcon from '../components/icons/GayageumIcon.astro';
+import HaegeumIcon from '../components/icons/HaegeumIcon.astro';
+import DansoIcon from '../components/icons/DansoIcon.astro';
+import GeomungoIcon from '../components/icons/GeomungoIcon.astro';
 import tracksData from '../data/tracks.json';
-import genresData from '../data/genres.json';
-import type { Track, Genre } from '../types';
+import regionsData from '../data/regions.json';
+import { countryToFlag, countryNamesKo } from '../lib/countries';
+import type { Track } from '../types';
 
 const tracks = tracksData as Track[];
-const genres = genresData as Genre[];
+const regions = regionsData;
 
 const latest = [...tracks].sort((a, b) =>
   b.published_at.localeCompare(a.published_at),
 )[0];
+
+// Currently we focus on the active region (East Asia)
+const activeRegion = regions.find((r) => r.active);
+
+const iconMap: Record<string, any> = {
+  janggu: JanguIcon,
+  buk: BukIcon,
+  gayageum: GayageumIcon,
+  haegeum: HaegeumIcon,
+  danso: DansoIcon,
+  geomungo: GeomungoIcon,
+};
+
+const instruments = activeRegion
+  ? activeRegion.instruments.map((inst) => {
+      const track = tracks.find(
+        (t) => t.fusion_instrument === inst.id && t.genre === inst.default_genre,
+      );
+      return { ...inst, track };
+    })
+  : [];
+
+const totalTracks = activeRegion
+  ? activeRegion.instruments.reduce((sum, i) => sum + i.track_count, 0)
+  : 0;
 ---
 
 <Layout>
   {latest && <TrackHero track={latest} />}
-  <GenreGrid genres={genres} />
+
+  <section class="catalog-section">
+    <div class="section-header">
+      <div class="tag">CURRENT · 현재 카탈로그</div>
+      <div class="region-line">
+        <span class="region-en">{activeRegion?.label}</span>
+        <span class="region-dot">·</span>
+        <span class="region-ko">{activeRegion?.label_ko}</span>
+        <span class="region-flags">
+          {activeRegion?.flag_codes.map((code) => (
+            <span class="flag" title={countryNamesKo[code] || code}>{countryToFlag(code)}</span>
+          ))}
+        </span>
+      </div>
+      <p class="meta-line">
+        {activeRegion?.instruments.length} instruments
+        <span class="meta-sep">·</span>
+        <span class="active-meta">{totalTracks} track active</span>
+      </p>
+    </div>
+
+    <div class="instrument-grid">
+      {instruments.map((inst) => {
+        const Icon = iconMap[inst.id];
+        const flagEmoji = countryToFlag(inst.country);
+        const cardContent = (
+          <Fragment>
+            <div class="card-top">
+              <span class="icon-slot">
+                {Icon && <Icon size={28} />}
+              </span>
+              <span class="flag-slot">
+                <span class="flag" title={countryNamesKo[inst.country] || inst.country}>{flagEmoji}</span>
+                {inst.track && <div class="active-dot" aria-hidden="true"></div>}
+              </span>
+            </div>
+            <div class="instr-name-block">
+              {inst.label_ko && <div class="instr-ko">{inst.label_ko}</div>}
+              <div class={inst.label_ko ? 'instr-en-small' : 'instr-en-main'}>{inst.label_en}</div>
+            </div>
+            <div class="genre-line">
+              <span class="fusion-op">⊗</span>
+              <span class="genre-name">{inst.default_genre}</span>
+              <span class="track-status">
+                {inst.track ? `· ${inst.track_count} track` : '· soon'}
+              </span>
+            </div>
+          </Fragment>
+        );
+
+        return inst.track ? (
+          <a href={`/track/${inst.track.id}`} class="instr-card instr-active">
+            {cardContent}
+          </a>
+        ) : (
+          <div class="instr-card instr-coming">
+            {cardContent}
+          </div>
+        );
+      })}
+    </div>
+
+    <div class="atlas-cta-row">
+      <a href="/genres" class="atlas-cta">전체 8개 지역 보기 → Atlas</a>
+    </div>
+  </section>
 
   <footer
-    style="max-width: 1080px; margin: 56px auto 0; padding: 28px 32px; display: flex; justify-content: space-between; align-items: center; border-top: 0.5px solid var(--color-border);"
+    class="page-footer"
   >
-    <div class="mono" style="font-size: 10px; color: var(--color-text-faded); letter-spacing: 0.14em;">
+    <div class="footer-meta">
       EST. 2026 · SEOUL · COSMOS
     </div>
     <Stamp />
   </footer>
 </Layout>
+
+<style>
+  .catalog-section {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 32px 32px 18px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-header {
+    margin-bottom: 28px;
+    padding-top: 14px;
+    border-top: 0.5px solid var(--color-border);
+  }
+
+  .section-header .tag {
+    margin-bottom: 14px;
+  }
+
+  .region-line {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .region-en {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.06em;
+  }
+
+  .region-dot {
+    color: var(--color-text-dim);
+  }
+
+  .region-ko {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    color: var(--color-text-primary);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .region-flags {
+    display: inline-flex;
+    gap: 6px;
+    margin-left: 6px;
+    font-size: 18px;
+    line-height: 1;
+    filter: saturate(0.9);
+  }
+
+  .meta-line {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-faded);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .meta-sep {
+    color: var(--color-text-dim);
+    margin: 0 6px;
+  }
+
+  .active-meta {
+    color: var(--color-dancheong-red);
+  }
+
+  .instrument-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+
+  .instr-card {
+    position: relative;
+    padding: 16px 16px 14px;
+    border: 0.5px solid var(--color-border);
+    background: rgba(22, 18, 31, 0.5);
+    backdrop-filter: blur(4px);
+    transition: all 0.2s;
+    display: block;
+  }
+
+  .instr-active {
+    border-color: var(--color-border-strong);
+    background: rgba(22, 18, 31, 0.7);
+    cursor: pointer;
+  }
+
+  .instr-active:hover {
+    border-color: var(--color-dancheong-red);
+    box-shadow: 0 0 24px rgba(232, 72, 82, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .instr-coming {
+    opacity: 0.55;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    height: 28px;
+  }
+
+  .icon-slot {
+    color: var(--color-text-primary);
+    line-height: 1;
+    height: 28px;
+    display: flex;
+    align-items: center;
+  }
+
+  .flag-slot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .flag-slot .flag {
+    font-size: 18px;
+    line-height: 1;
+    filter: saturate(0.9);
+  }
+
+  .instr-name-block {
+    margin-bottom: 12px;
+  }
+
+  .instr-ko {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    color: var(--color-text-primary);
+    line-height: 1.2;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .instr-en-small {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--color-text-faded);
+    letter-spacing: 0.08em;
+  }
+
+  .instr-en-main {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    color: var(--color-text-primary);
+    line-height: 1.2;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .genre-line {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.04em;
+    padding-top: 10px;
+    border-top: 0.5px solid var(--color-border);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .fusion-op {
+    color: var(--color-dancheong-red);
+    font-family: var(--font-serif);
+    font-size: 13px;
+    text-shadow: 0 0 8px rgba(232, 72, 82, 0.4);
+  }
+
+  .genre-name {
+    color: var(--color-text-primary);
+  }
+
+  .instr-active .track-status {
+    color: var(--color-dancheong-red);
+  }
+
+  .track-status {
+    color: var(--color-text-faded);
+  }
+
+  .active-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-dancheong-red);
+    box-shadow: 0 0 12px rgba(232, 72, 82, 0.7);
+  }
+
+  .atlas-cta-row {
+    margin-top: 28px;
+    text-align: center;
+  }
+
+  .atlas-cta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-border-strong);
+    padding: 12px 24px;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .atlas-cta:hover {
+    color: var(--color-dancheong-red);
+    border-color: var(--color-dancheong-red);
+    box-shadow: 0 0 24px rgba(232, 72, 82, 0.15);
+  }
+
+  .page-footer {
+    max-width: 1080px;
+    margin: 56px auto 0;
+    padding: 28px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid var(--color-border);
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-faded);
+    letter-spacing: 0.14em;
+  }
+
+  @media (max-width: 540px) {
+    .catalog-section {
+      padding: 28px 20px 18px;
+    }
+    .region-ko {
+      font-size: 20px;
+    }
+    .instrument-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .instr-ko {
+      font-size: 18px;
+    }
+    .instr-en-main {
+      font-size: 17px;
+    }
+  }
+</style>
