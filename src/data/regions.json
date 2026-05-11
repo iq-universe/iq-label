@@ -13,10 +13,10 @@
       { "id": "haegeum", "label_ko": "해금", "label_en": "haegeum", "country": "KR", "default_genre": "ambient" },
       { "id": "danso", "label_ko": "단소", "label_en": "danso", "country": "KR", "default_genre": "lo-fi" },
       { "id": "geomungo", "label_ko": "거문고", "label_en": "geomungo", "country": "KR", "default_genre": "experimental" },
-      { "id": "koto", "label_ko": null, "label_en": "koto", "country": "JP", "default_genre": "jazz" },
-      { "id": "shakuhachi", "label_ko": null, "label_en": "shakuhachi", "country": "JP", "default_genre": "lo-fi" },
-      { "id": "erhu", "label_ko": null, "label_en": "erhu", "country": "CN", "default_genre": "ambient" },
-      { "id": "pipa", "label_ko": null, "label_en": "pipa", "country": "CN", "default_genre": "experimental" }
+      { "id": "koto", "label_ko": "코토", "label_en": "koto", "country": "JP", "default_genre": "jazz" },
+      { "id": "shakuhachi", "label_ko": "샤쿠하치", "label_en": "shakuhachi", "country": "JP", "default_genre": "lo-fi" },
+      { "id": "erhu", "label_ko": "얼후", "label_en": "erhu", "country": "CN", "default_genre": "ambient" },
+      { "id": "pipa", "label_ko": "비파", "label_en": "pipa", "country": "CN", "default_genre": "experimental" }
     ]
   },
   {
@@ -27,12 +27,12 @@
     "blurb": "인도 아대륙의 라가와 리듬",
     "flag_codes": ["IN"],
     "instruments": [
-      { "id": "sitar", "label_ko": null, "label_en": "sitar", "country": "IN", "default_genre": "ambient" },
-      { "id": "tabla", "label_ko": null, "label_en": "tabla", "country": "IN", "default_genre": "boom-bap" },
-      { "id": "sarod", "label_ko": null, "label_en": "sarod", "country": "IN", "default_genre": "jazz" },
-      { "id": "tampura", "label_ko": null, "label_en": "tampura", "country": "IN", "default_genre": "ambient" },
-      { "id": "santoor", "label_ko": null, "label_en": "santoor", "country": "IN", "default_genre": "jazz" },
-      { "id": "sarangi", "label_ko": null, "label_en": "sarangi", "country": "IN", "default_genre": "ambient" }
+      { "id": "sitar", "label_ko": "시타르", "label_en": "sitar", "country": "IN", "default_genre": "ambient" },
+      { "id": "tabla", "label_ko": "타블라", "label_en": "tabla", "country": "IN", "default_genre": "boom-bap" },
+      { "id": "sarod", "label_ko": "사로드", "label_en": "sarod", "country": "IN", "default_genre": "jazz" },
+      { "id": "tampura", "label_ko": "탐푸라", "label_en": "tampura", "country": "IN", "default_genre": "ambient" },
+      { "id": "santoor", "label_ko": "산투르", "label_en": "santoor", "country": "IN", "default_genre": "jazz" },
+      { "id": "sarangi", "label_ko": "사랑기", "label_en": "sarangi", "country": "IN", "default_genre": "ambient" }
     ]
   },
   {
@@ -43,12 +43,12 @@
     "blurb": "중동의 마캄과 미분음",
     "flag_codes": ["EG", "IR", "TR", "AM"],
     "instruments": [
-      { "id": "oud", "label_ko": null, "label_en": "oud", "country": "EG", "default_genre": "jazz" },
-      { "id": "ney", "label_ko": null, "label_en": "ney", "country": "IR", "default_genre": "lo-fi" },
-      { "id": "qanun", "label_ko": null, "label_en": "qanun", "country": "TR", "default_genre": "jazz" },
-      { "id": "darbuka", "label_ko": null, "label_en": "darbuka", "country": "EG", "default_genre": "boom-bap" },
-      { "id": "saz", "label_ko": null, "label_en": "saz", "country": "TR", "default_genre": "jazz" },
-      { "id": "duduk", "label_ko": null, "label_en": "duduk", "country": "AM", "default_genre": "ambient" }
+      { "id": "oud", "label_ko": "우드", "label_en": "oud", "country": "EG", "default_genre": "jazz" },
+      { "id": "ney", "label_ko": "네이", "label_en": "ney", "country": "IR", "default_genre": "lo-fi" },
+      { "id": "qanun", "label_ko": "카눈", "label_en": "qanun", "country": "TR", "default_genre": "jazz" },
+      { "id": "darbuka", "label_ko": "다르부카", "label_en": "darbuka", "country": "EG", "default_genre": "boom-bap" },
+      { "id": "saz", "label_ko": "사즈", "label_en": "saz", "country": "TR", "default_genre": "jazz" },
+      { "id": "duduk", "label_ko": "두두크", "label_en": "duduk", "country": "AM", "default_genre": "ambient" }
     ]
   },
   {
@@ -59,12 +59,12 @@
     "blurb": "사하라 이남의 폴리리듬과 줄악기",
     "flag_codes": ["SN", "ML", "ZW", "NG"],
     "instruments": [
-      { "id": "kora", "label_ko": null, "label_en": "kora", "country": "SN", "default_genre": "jazz" },
-      { "id": "djembe", "label_ko": null, "label_en": "djembe", "country": "ML", "default_genre": "funky" },
-      { "id": "mbira", "label_ko": null, "label_en": "mbira", "country": "ZW", "default_genre": "experimental" },
-      { "id": "balafon", "label_ko": null, "label_en": "balafon", "country": "ML", "default_genre": "experimental" },
-      { "id": "talking-drum", "label_ko": null, "label_en": "talking drum", "country": "NG", "default_genre": "boom-bap" },
-      { "id": "ngoni", "label_ko": null, "label_en": "ngoni", "country": "ML", "default_genre": "jazz" }
+      { "id": "kora", "label_ko": "코라", "label_en": "kora", "country": "SN", "default_genre": "jazz" },
+      { "id": "djembe", "label_ko": "젬베", "label_en": "djembe", "country": "ML", "default_genre": "funky" },
+      { "id": "mbira", "label_ko": "음비라", "label_en": "mbira", "country": "ZW", "default_genre": "experimental" },
+      { "id": "balafon", "label_ko": "발라폰", "label_en": "balafon", "country": "ML", "default_genre": "experimental" },
+      { "id": "talking-drum", "label_ko": "토킹드럼", "label_en": "talking drum", "country": "NG", "default_genre": "boom-bap" },
+      { "id": "ngoni", "label_ko": "응고니", "label_en": "ngoni", "country": "ML", "default_genre": "jazz" }
     ]
   },
   {
@@ -75,11 +75,11 @@
     "blurb": "유럽 민속의 드론과 즉흥",
     "flag_codes": ["IE", "FR", "SE"],
     "instruments": [
-      { "id": "bodhran", "label_ko": null, "label_en": "bodhrán", "country": "IE", "default_genre": "boom-bap" },
-      { "id": "hurdy-gurdy", "label_ko": null, "label_en": "hurdy-gurdy", "country": "FR", "default_genre": "experimental" },
-      { "id": "accordion", "label_ko": null, "label_en": "accordion", "country": "FR", "default_genre": "funky" },
-      { "id": "uilleann-pipes", "label_ko": null, "label_en": "uilleann pipes", "country": "IE", "default_genre": "ambient" },
-      { "id": "nyckelharpa", "label_ko": null, "label_en": "nyckelharpa", "country": "SE", "default_genre": "jazz" }
+      { "id": "bodhran", "label_ko": "보드란", "label_en": "bodhrán", "country": "IE", "default_genre": "boom-bap" },
+      { "id": "hurdy-gurdy", "label_ko": "허디거디", "label_en": "hurdy-gurdy", "country": "FR", "default_genre": "experimental" },
+      { "id": "accordion", "label_ko": "아코디언", "label_en": "accordion", "country": "FR", "default_genre": "funky" },
+      { "id": "uilleann-pipes", "label_ko": "일리언 파이프", "label_en": "uilleann pipes", "country": "IE", "default_genre": "ambient" },
+      { "id": "nyckelharpa", "label_ko": "닉켈하르파", "label_en": "nyckelharpa", "country": "SE", "default_genre": "jazz" }
     ]
   },
   {
@@ -90,12 +90,12 @@
     "blurb": "남북미의 줄과 타악",
     "flag_codes": ["US", "BR", "PE", "TT"],
     "instruments": [
-      { "id": "charango", "label_ko": null, "label_en": "charango", "country": "BO", "default_genre": "jazz" },
-      { "id": "cajon", "label_ko": null, "label_en": "cajón", "country": "PE", "default_genre": "boom-bap" },
-      { "id": "banjo", "label_ko": null, "label_en": "banjo", "country": "US", "default_genre": "funky" },
-      { "id": "steel-drum", "label_ko": null, "label_en": "steel drum", "country": "TT", "default_genre": "funky" },
-      { "id": "native-flute", "label_ko": null, "label_en": "native flute", "country": "US", "default_genre": "lo-fi" },
-      { "id": "berimbau", "label_ko": null, "label_en": "berimbau", "country": "BR", "default_genre": "experimental" }
+      { "id": "charango", "label_ko": "차랑고", "label_en": "charango", "country": "BO", "default_genre": "jazz" },
+      { "id": "cajon", "label_ko": "카혼", "label_en": "cajón", "country": "PE", "default_genre": "boom-bap" },
+      { "id": "banjo", "label_ko": "밴조", "label_en": "banjo", "country": "US", "default_genre": "funky" },
+      { "id": "steel-drum", "label_ko": "스틸드럼", "label_en": "steel drum", "country": "TT", "default_genre": "funky" },
+      { "id": "native-flute", "label_ko": "네이티브 플루트", "label_en": "native flute", "country": "US", "default_genre": "lo-fi" },
+      { "id": "berimbau", "label_ko": "베림바우", "label_en": "berimbau", "country": "BR", "default_genre": "experimental" }
     ]
   },
   {
@@ -106,9 +106,9 @@
     "blurb": "원주민의 드론과 타악",
     "flag_codes": ["AU", "PG", "CK"],
     "instruments": [
-      { "id": "didgeridoo", "label_ko": null, "label_en": "didgeridoo", "country": "AU", "default_genre": "ambient" },
-      { "id": "slit-drum", "label_ko": null, "label_en": "slit drum", "country": "PG", "default_genre": "boom-bap" },
-      { "id": "pate", "label_ko": null, "label_en": "pātē", "country": "CK", "default_genre": "boom-bap" }
+      { "id": "didgeridoo", "label_ko": "디저리두", "label_en": "didgeridoo", "country": "AU", "default_genre": "ambient" },
+      { "id": "slit-drum", "label_ko": "슬릿드럼", "label_en": "slit drum", "country": "PG", "default_genre": "boom-bap" },
+      { "id": "pate", "label_ko": "파테", "label_en": "pātē", "country": "CK", "default_genre": "boom-bap" }
     ]
   },
   {
@@ -119,10 +119,10 @@
     "blurb": "지역 너머의 현대 악기들",
     "flag_codes": ["CH", "US", "RU"],
     "instruments": [
-      { "id": "hang", "label_ko": null, "label_en": "hang", "country": "CH", "default_genre": "ambient" },
-      { "id": "glass-harmonica", "label_ko": null, "label_en": "glass harmonica", "country": "US", "default_genre": "ambient" },
-      { "id": "theremin", "label_ko": null, "label_en": "theremin", "country": "RU", "default_genre": "experimental" },
-      { "id": "waterphone", "label_ko": null, "label_en": "waterphone", "country": "US", "default_genre": "experimental" }
+      { "id": "hang", "label_ko": "행드럼", "label_en": "hang", "country": "CH", "default_genre": "ambient" },
+      { "id": "glass-harmonica", "label_ko": "글라스 하모니카", "label_en": "glass harmonica", "country": "US", "default_genre": "ambient" },
+      { "id": "theremin", "label_ko": "테레민", "label_en": "theremin", "country": "RU", "default_genre": "experimental" },
+      { "id": "waterphone", "label_ko": "워터폰", "label_en": "waterphone", "country": "US", "default_genre": "experimental" }
     ]
   }
 ]

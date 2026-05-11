@@ -15,7 +15,6 @@ export async function getStaticPaths() {
 const { region } = Astro.props;
 const tracks = tracksData as Track[];
 
-// Track-driven status per instrument
 const instrumentsWithStatus = region.instruments.map((inst) => {
   const matchingTracks = tracks.filter((t) => t.fusion_instrument === inst.id);
   const track = matchingTracks[0];
@@ -77,8 +76,8 @@ const regionIsActive = activeCount > 0;
               {inst.track && <div class="active-dot" aria-hidden="true"></div>}
             </div>
             <div class="instr-name-block">
-              {inst.label_ko && <div class="instr-ko">{inst.label_ko}</div>}
-              <div class={inst.label_ko ? 'instr-en-small' : 'instr-en-main'}>{inst.label_en}</div>
+              <div class="instr-ko">{inst.label_ko}</div>
+              <div class="instr-en">{inst.label_en}</div>
             </div>
             <div class="genre-line">
               <span class="fusion-op">⊗</span>
@@ -288,20 +287,11 @@ const regionIsActive = activeCount > 0;
     margin-bottom: 2px;
   }
 
-  .instr-en-small {
+  .instr-en {
     font-family: var(--font-mono);
     font-size: 11px;
     color: var(--color-text-faded);
     letter-spacing: 0.08em;
-  }
-
-  .instr-en-main {
-    font-family: var(--font-serif);
-    font-size: 22px;
-    color: var(--color-text-primary);
-    line-height: 1.2;
-    font-weight: 500;
-    font-style: italic;
   }
 
   .genre-line {

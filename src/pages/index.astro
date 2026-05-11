@@ -35,7 +35,7 @@ const iconMap: Record<string, any> = {
   geomungo: GeomungoIcon,
 };
 
-// Track-driven instrument status: find ANY track for this instrument
+// Track-driven instrument status: match by instrument id only
 const instruments = focusRegion.instruments.map((inst) => {
   const matchingTracks = tracks.filter((t) => t.fusion_instrument === inst.id);
   const track = matchingTracks[0];
@@ -43,7 +43,6 @@ const instruments = focusRegion.instruments.map((inst) => {
     ...inst,
     track,
     track_count: matchingTracks.length,
-    // Display the actual track's genre when a track exists, else default
     display_genre: track ? track.genre : inst.default_genre,
   };
 });
@@ -90,8 +89,8 @@ const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
               </span>
             </div>
             <div class="instr-name-block">
-              {inst.label_ko && <div class="instr-ko">{inst.label_ko}</div>}
-              <div class={inst.label_ko ? 'instr-en-small' : 'instr-en-main'}>{inst.label_en}</div>
+              <div class="instr-ko">{inst.label_ko}</div>
+              <div class="instr-en">{inst.label_en}</div>
             </div>
             <div class="genre-line">
               <span class="fusion-op">⊗</span>
@@ -274,20 +273,11 @@ const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
     margin-bottom: 2px;
   }
 
-  .instr-en-small {
+  .instr-en {
     font-family: var(--font-mono);
     font-size: 10.5px;
     color: var(--color-text-faded);
     letter-spacing: 0.08em;
-  }
-
-  .instr-en-main {
-    font-family: var(--font-serif);
-    font-size: 19px;
-    color: var(--color-text-primary);
-    line-height: 1.2;
-    font-weight: 500;
-    font-style: italic;
   }
 
   .genre-line {
@@ -383,9 +373,6 @@ const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
     }
     .instr-ko {
       font-size: 18px;
-    }
-    .instr-en-main {
-      font-size: 17px;
     }
   }
 </style>
