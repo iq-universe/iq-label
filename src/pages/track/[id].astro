@@ -111,41 +111,6 @@ const InstrumentIcon = iconMap[track.fusion_instrument] || JanguIcon;
     </section>
 
     <VibeNotes notes={track.vibe_notes} />
-
-    <details class="generation-panel">
-      <summary class="generation-summary">
-        <div>
-          <div class="tag generation-tag">GENERATION · 생성 정보</div>
-          <div class="mono generation-line">
-            {track.generation.candidate_count} candidates · {track.generation.selected} selected ·
-            {track.generation.tool}
-          </div>
-        </div>
-        <span class="mono generation-arrow">▾</span>
-      </summary>
-      <div class="generation-body">
-        <p>
-          이 트랙은 <span class="mono generation-tool">{track.generation.tool}</span>
-          으로 {track.generation.candidate_count}개 후보를 생성하고, 그중 {track.generation.selected}곡을 선별했습니다.
-        </p>
-        {
-          track.reference_artists.length > 0 && (
-            <p>
-              참고 아티스트:{' '}
-              {track.reference_artists.map((a, i) => (
-                <span>
-                  {i > 0 ? ', ' : ''}
-                  <span class="mono">{a}</span>
-                </span>
-              ))}
-            </p>
-          )
-        }
-        <p class="mono generation-license">
-          License: {track.license}
-        </p>
-      </div>
-    </details>
   </article>
 
   <style>
@@ -458,59 +423,6 @@ const InstrumentIcon = iconMap[track.fusion_instrument] || JanguIcon;
       display: flex;
       justify-content: space-between;
       margin-top: 4px;
-      color: var(--color-text-faded);
-      font-size: 11px;
-    }
-
-    .generation-panel {
-      border-top: 0.5px solid var(--color-border);
-      background: rgba(13, 10, 24, 0.2);
-    }
-
-    .generation-summary {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      list-style: none;
-      padding: 20px 4px 18px;
-    }
-
-    .generation-summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .generation-tag {
-      margin-bottom: 6px;
-    }
-
-    .generation-line {
-      color: var(--color-text-secondary);
-      font-size: 12px;
-    }
-
-    .generation-arrow {
-      color: var(--color-text-faded);
-      font-size: 14px;
-      transition: transform 0.2s;
-    }
-
-    .generation-panel[open] .generation-arrow {
-      transform: rotate(180deg);
-    }
-
-    .generation-body {
-      padding: 0 4px 24px;
-      color: var(--color-text-secondary);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .generation-tool {
-      font-weight: 500;
-    }
-
-    .generation-license {
       color: var(--color-text-faded);
       font-size: 11px;
     }

@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import TrackHero from '../components/TrackHero.astro';
-import Stamp from '../components/Stamp.astro';
 import JanguIcon from '../components/icons/JanguIcon.astro';
 import BukIcon from '../components/icons/BukIcon.astro';
 import GayageumIcon from '../components/icons/GayageumIcon.astro';
@@ -119,12 +118,6 @@ const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
     </div>
   </section>
 
-  <footer class="page-footer">
-    <div class="footer-meta">
-      EST. 2026 · SEOUL · COSMOS
-    </div>
-    <Stamp />
-  </footer>
 </Layout>
 
 <style>
@@ -434,25 +427,6 @@ const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
     }
   }
 
-  .page-footer {
-    max-width: 1080px;
-    margin: 56px auto 0;
-    padding: 28px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 0.5px solid var(--color-border);
-    position: relative;
-    z-index: 1;
-  }
-
-  .footer-meta {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--color-text-faded);
-    letter-spacing: 0.14em;
-  }
-
   @media (max-width: 540px) {
     .catalog-section {
       padding: 28px 20px 18px;
@@ -491,10 +465,6 @@ const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
       letter-spacing: 0.1em;
     }
 
-    .page-footer {
-      margin-top: 40px;
-      padding: 24px 20px;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
