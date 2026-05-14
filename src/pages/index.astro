@@ -231,6 +231,21 @@ const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
     transition: opacity 0.2s;
   }
 
+  .instr-card::after {
+    content: '';
+    position: absolute;
+    right: 18px;
+    top: 16px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(232, 72, 82, 0.28);
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0.55);
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
   .instr-active {
     border-color: var(--color-border-strong);
     background:
@@ -244,10 +259,25 @@ const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
     opacity: 0.85;
   }
 
-  .instr-active:hover {
+  .instr-active:hover,
+  .instr-active:focus-visible {
     border-color: var(--color-dancheong-red);
-    box-shadow: 0 0 24px rgba(232, 72, 82, 0.15);
+    box-shadow:
+      0 0 24px rgba(232, 72, 82, 0.15),
+      inset 0 0 34px rgba(232, 72, 82, 0.04);
     transform: translateY(-1px);
+    outline: none;
+  }
+
+  .instr-active:hover::after,
+  .instr-active:focus-visible::after {
+    opacity: 0.86;
+    transform: scale(1.28);
+    animation: card-sound-ring 1.05s ease-out infinite;
+  }
+
+  .instr-active:active {
+    transform: translateY(0) scale(0.99);
   }
 
   .instr-coming {
@@ -276,7 +306,8 @@ const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
     transition: color 0.2s, transform 0.2s;
   }
 
-  .instr-active:hover .icon-slot {
+  .instr-active:hover .icon-slot,
+  .instr-active:focus-visible .icon-slot {
     color: var(--color-gold-bright);
     transform: translateY(-1px);
   }
@@ -355,6 +386,7 @@ const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
     border-radius: 50%;
     background: var(--color-dancheong-red);
     box-shadow: 0 0 12px rgba(232, 72, 82, 0.7);
+    animation: active-dot-beat 1.5s ease-in-out infinite;
   }
 
   .atlas-cta-row {
@@ -378,6 +410,28 @@ const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
     color: var(--color-dancheong-red);
     border-color: var(--color-dancheong-red);
     box-shadow: 0 0 24px rgba(232, 72, 82, 0.15);
+  }
+
+  @keyframes card-sound-ring {
+    from {
+      opacity: 0.72;
+      transform: scale(0.58);
+    }
+    to {
+      opacity: 0;
+      transform: scale(1.42);
+    }
+  }
+
+  @keyframes active-dot-beat {
+    0%, 100% {
+      opacity: 0.62;
+      transform: scale(0.82);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
   }
 
   .page-footer {
@@ -440,6 +494,14 @@ const totalTracks = instruments.reduce((sum, i) => sum + i.track_count, 0);
     .page-footer {
       margin-top: 40px;
       padding: 24px 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .instr-active:hover::after,
+    .instr-active:focus-visible::after,
+    .active-dot {
+      animation: none;
     }
   }
 </style>

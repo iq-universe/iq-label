@@ -39,107 +39,93 @@ const InstrumentIcon = iconMap[track.fusion_instrument] || JanguIcon;
 ---
 
 <Layout title={`${track.title_ko} — Label Q`}>
-  <div style="max-width: 760px; margin: 0 auto;">
-    <div
-      class="mono"
-      style="padding: 14px 24px; display: flex; align-items: center; gap: 8px; color: var(--color-text-faded); font-size: 11px; letter-spacing: 0.05em;"
-    >
-      <a href={`/genre/${track.genre}`} style="display: flex; align-items: center; gap: 8px;">
-        ← back to {track.genre}
-      </a>
-    </div>
+  <article class="track-detail">
+    <a class="mono track-back" href={`/genre/${track.genre}`}>
+      ← {track.genre}
+    </a>
 
-    <div
-      style="display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 28px 24px;"
-      class="track-grid"
-    >
-      <div
-        style="aspect-ratio: 1; background: rgba(22, 18, 31, 0.6); backdrop-filter: blur(4px); border: 0.5px solid var(--color-border-strong); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; position: relative;"
-      >
-        <div class="mono" style="font-size: 10px; color: var(--color-text-faded); letter-spacing: 0.12em;">
-          NO. {track.number}
-        </div>
-        <div
-          style="display: flex; align-items: center; justify-content: center; flex: 1; color: var(--color-text-primary);"
-        >
-          <InstrumentIcon size={64} strokeWidth={0.9} />
-        </div>
-        <div>
-          <div class="serif" style="font-size: 13px; font-weight: 500;">
-            {track.fusion_with_label}
-          </div>
-          <div class="mono" style="font-size: 10px; color: var(--color-text-faded); margin-top: 1px;">
-            {track.published_at.slice(0, 4)}
+    <section class="track-stage">
+      <div class="stage-flow stage-flow-1" aria-hidden="true"></div>
+      <div class="stage-flow stage-flow-2" aria-hidden="true"></div>
+
+      <aside class="artifact-card">
+        <div class="mono card-number">NO. {track.number}</div>
+        <div class="instrument-field">
+          <span class="instrument-ring instrument-ring-1" aria-hidden="true"></span>
+          <span class="instrument-ring instrument-ring-2" aria-hidden="true"></span>
+          <div class="instrument-symbol">
+            <InstrumentIcon size={78} strokeWidth={0.9} />
           </div>
         </div>
-        <div style="position: absolute; bottom: -10px; right: -10px;">
-          <Stamp text={track.number} size={36} rotate={-6} />
+        <div class="card-caption">
+          <div class="serif card-title">{track.fusion_with_label}</div>
+          <div class="mono card-year">{track.published_at.slice(0, 4)}</div>
         </div>
-      </div>
+        <div class="stamp-wrap">
+          <Stamp text={track.number} size={34} rotate={-6} />
+        </div>
+      </aside>
 
-      <div style="min-width: 0;">
-        <div class="tag" style="margin-bottom: 8px;">
-          {track.genre} / no. {track.number}
+      <div class="track-copy">
+        <div class="mono track-kicker">
+          <span>{track.genre}</span>
+          <span>{track.bpm} bpm</span>
+          <span>{track.key}</span>
         </div>
-        <h1
-          class="serif glow-cream"
-          style="font-size: 36px; font-weight: 500; margin: 0 0 6px; line-height: 1.1;"
-        >
+        <h1 class="serif glow-cream track-title">
           {track.title_ko}
         </h1>
-        <div
-          style="font-style: italic; font-size: 14px; color: var(--color-text-secondary); margin-bottom: 18px;"
-        >
+        <div class="track-subtitle">
           {track.title_en}
         </div>
-        <div
-          class="mono"
-          style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--color-text-secondary); margin-bottom: 6px;"
-        >
+        <div class="mono track-meta">
           <InstrumentIcon size={18} />
-          <span class="serif" style="font-size: 13px; letter-spacing: 0; color: var(--color-text-primary);">
+          <span class="serif instrument-name">
             {track.fusion_with_label}
           </span>
           <span class="fusion-op">⊗</span>
           <span>{track.genre}</span>
+          <span class="meta-dot">·</span>
+          <span>{track.duration_label}</span>
         </div>
-        <div class="mono" style="font-size: 11px; color: var(--color-text-faded); margin-bottom: 22px;">
-          {track.duration_label} · {track.bpm} bpm · {track.key}
-        </div>
-        <button data-track={trackJson}>▶ PLAY</button>
+        <button class="track-play" data-track={trackJson}>
+          <span class="play-disc">▶</span>
+          <span class="play-label">PLAY</span>
+          <span class="play-bars" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
       </div>
-    </div>
+    </section>
 
-    <div style="padding: 0 24px 22px;">
+    <section class="wave-section">
       <Waveform trackId={track.id} />
-      <div style="display: flex; justify-content: space-between; margin-top: 4px;">
-        <span class="mono" style="font-size: 10px; color: var(--color-text-faded);">0:00</span>
-        <span class="mono" style="font-size: 10px; color: var(--color-text-faded);">
+      <div class="wave-times">
+        <span class="mono">0:00</span>
+        <span class="mono">
           {track.duration_label}
         </span>
       </div>
-    </div>
+    </section>
 
     <VibeNotes notes={track.vibe_notes} />
 
-    <details style="border-top: 0.5px solid var(--color-border);">
-      <summary
-        style="padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; list-style: none;"
-      >
+    <details class="generation-panel">
+      <summary class="generation-summary">
         <div>
-          <div class="tag" style="margin-bottom: 4px;">GENERATION · 생성 정보</div>
-          <div class="mono" style="font-size: 12px; color: var(--color-text-secondary);">
+          <div class="tag generation-tag">GENERATION · 생성 정보</div>
+          <div class="mono generation-line">
             {track.generation.candidate_count} candidates · {track.generation.selected} selected ·
             {track.generation.tool}
           </div>
         </div>
-        <span class="mono" style="font-size: 14px; color: var(--color-text-faded);">▾</span>
+        <span class="mono generation-arrow">▾</span>
       </summary>
-      <div
-        style="padding: 0 24px 22px; color: var(--color-text-secondary); font-size: 14px; line-height: 1.7;"
-      >
+      <div class="generation-body">
         <p>
-          이 트랙은 <span class="mono" style="font-weight: 500;">{track.generation.tool}</span>
+          이 트랙은 <span class="mono generation-tool">{track.generation.tool}</span>
           으로 {track.generation.candidate_count}개 후보를 생성하고, 그중 {track.generation.selected}곡을 선별했습니다.
         </p>
         {
@@ -155,17 +141,495 @@ const InstrumentIcon = iconMap[track.fusion_instrument] || JanguIcon;
             </p>
           )
         }
-        <p style="font-size: 11px; color: var(--color-text-faded);" class="mono">
+        <p class="mono generation-license">
           License: {track.license}
         </p>
       </div>
     </details>
-  </div>
+  </article>
 
   <style>
-    @media (max-width: 540px) {
+    .track-detail {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 32px 86px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .track-back {
+      display: inline-flex;
+      align-items: center;
+      margin: 22px 0 36px;
+      color: var(--color-text-faded);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+    }
+
+    .track-back:hover {
+      color: var(--color-dancheong-red);
+    }
+
+    .track-stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(220px, 290px) minmax(0, 1fr);
+      gap: clamp(30px, 5vw, 66px);
+      align-items: center;
+      overflow: hidden;
+      padding: 22px 0 34px;
+      isolation: isolate;
+    }
+
+    .track-stage::before {
+      content: '';
+      position: absolute;
+      left: 9%;
+      right: 0;
+      top: 53%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232, 72, 82, 0.42), rgba(242, 234, 216, 0.08), transparent);
+      opacity: 0.6;
+      transform: translateY(-50%);
+    }
+
+    .stage-flow {
+      position: absolute;
+      z-index: -1;
+      width: 34%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232, 72, 82, 0.75), transparent);
+      opacity: 0;
+      transform: rotate(-18deg) translateX(-80%);
+      animation: stage-flow 5.6s ease-in-out infinite;
+    }
+
+    .stage-flow-1 {
+      top: 32%;
+      left: 28%;
+    }
+
+    .stage-flow-2 {
+      top: 72%;
+      left: 18%;
+      animation-delay: 2s;
+    }
+
+    .artifact-card {
+      position: relative;
+      min-height: 286px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 22px;
+      border: 0.5px solid var(--color-border-strong);
+      background:
+        radial-gradient(circle at 75% 78%, rgba(232, 72, 82, 0.14), transparent 34%),
+        linear-gradient(180deg, rgba(242, 234, 216, 0.04), transparent 42%),
+        rgba(22, 18, 31, 0.58);
+      box-shadow:
+        inset 0 1px 0 rgba(242, 234, 216, 0.04),
+        0 24px 70px rgba(10, 6, 18, 0.18);
+      backdrop-filter: blur(6px);
+    }
+
+    .artifact-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 20%, rgba(242, 234, 216, 0.09), transparent 62%);
+      transform: translateX(-120%);
+      animation: card-sheen 5.8s ease-in-out infinite;
+    }
+
+    .card-number,
+    .card-year {
+      color: var(--color-text-faded);
+    }
+
+    .card-number {
+      position: relative;
+      z-index: 1;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+    }
+
+    .instrument-field {
+      position: relative;
+      z-index: 1;
+      min-height: 132px;
+      display: grid;
+      place-items: center;
+      color: var(--color-text-primary);
+    }
+
+    .instrument-ring {
+      position: absolute;
+      width: 116px;
+      height: 116px;
+      border-radius: 50%;
+      border: 1px solid rgba(232, 72, 82, 0.22);
+      animation: instrument-ring 4.8s ease-out infinite;
+    }
+
+    .instrument-ring-2 {
+      animation-delay: 1.65s;
+    }
+
+    .instrument-symbol {
+      transform-origin: center;
+      filter: drop-shadow(0 0 20px rgba(242, 234, 216, 0.12));
+      animation: instrument-float 2.8s ease-in-out infinite;
+    }
+
+    .card-caption {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-title {
+      color: var(--color-text-primary);
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .card-year {
+      margin-top: 4px;
+      font-size: 10px;
+    }
+
+    .stamp-wrap {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      z-index: 1;
+      animation: stamp-bounce 3.2s ease-in-out infinite;
+    }
+
+    .track-copy {
+      position: relative;
+      min-width: 0;
+    }
+
+    .track-kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+      color: var(--color-text-faded);
+      font-size: 11px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .track-kicker span {
+      border: 0.5px solid rgba(184, 171, 148, 0.22);
+      padding: 4px 8px;
+      background: rgba(22, 18, 31, 0.32);
+    }
+
+    .track-title {
+      margin: 0 0 10px;
+      font-size: clamp(44px, 6vw, 70px);
+      font-weight: 500;
+      line-height: 0.98;
+    }
+
+    .track-subtitle {
+      margin-bottom: 26px;
+      color: var(--color-text-secondary);
+      font-size: 19px;
+      font-style: italic;
+    }
+
+    .track-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      color: var(--color-text-secondary);
+      font-size: 13px;
+    }
+
+    .instrument-name {
+      color: var(--color-text-primary);
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    .meta-dot {
+      color: var(--color-text-dim);
+    }
+
+    .track-play {
+      position: relative;
+      min-width: 210px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      overflow: hidden;
+      padding: 13px 24px;
+      border-color: rgba(242, 234, 216, 0.82);
+      background:
+        linear-gradient(90deg, rgba(232, 72, 82, 0.18), transparent 58%),
+        rgba(22, 18, 31, 0.46);
+      box-shadow:
+        inset 0 0 0 1px rgba(242, 234, 216, 0.04),
+        0 0 0 rgba(232, 72, 82, 0);
+    }
+
+    .track-play::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent, rgba(232, 72, 82, 0.28), transparent);
+      transform: translateX(-120%);
+      animation: play-sweep 3s ease-in-out infinite;
+    }
+
+    .track-play:hover {
+      border-color: var(--color-dancheong-red);
+      background: var(--color-text-primary);
+      box-shadow: 0 0 34px rgba(232, 72, 82, 0.24);
+    }
+
+    .track-play > span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .play-disc {
+      display: inline-grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      color: var(--color-dancheong-red);
+      background: rgba(232, 72, 82, 0.12);
+      font-size: 10px;
+      box-shadow: 0 0 16px rgba(232, 72, 82, 0.22);
+    }
+
+    .track-play:hover .play-disc {
+      color: var(--color-bg);
+      background: rgba(13, 10, 24, 0.1);
+    }
+
+    .play-label {
+      letter-spacing: 0.24em;
+    }
+
+    .play-bars {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      height: 18px;
+    }
+
+    .play-bars span {
+      width: 2px;
+      height: 10px;
+      background: var(--color-dancheong-red);
+      animation: play-bar 0.9s ease-in-out infinite;
+    }
+
+    .play-bars span:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .play-bars span:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .track-play:hover .play-bars span {
+      background: var(--color-bg);
+    }
+
+    .wave-section {
+      position: relative;
+      padding: 12px 0 28px;
+    }
+
+    .wave-times {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+      color: var(--color-text-faded);
+      font-size: 11px;
+    }
+
+    .generation-panel {
+      border-top: 0.5px solid var(--color-border);
+      background: rgba(13, 10, 24, 0.2);
+    }
+
+    .generation-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      list-style: none;
+      padding: 20px 4px 18px;
+    }
+
+    .generation-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .generation-tag {
+      margin-bottom: 6px;
+    }
+
+    .generation-line {
+      color: var(--color-text-secondary);
+      font-size: 12px;
+    }
+
+    .generation-arrow {
+      color: var(--color-text-faded);
+      font-size: 14px;
+      transition: transform 0.2s;
+    }
+
+    .generation-panel[open] .generation-arrow {
+      transform: rotate(180deg);
+    }
+
+    .generation-body {
+      padding: 0 4px 24px;
+      color: var(--color-text-secondary);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .generation-tool {
+      font-weight: 500;
+    }
+
+    .generation-license {
+      color: var(--color-text-faded);
+      font-size: 11px;
+    }
+
+    @keyframes stage-flow {
+      0%, 42% {
+        opacity: 0;
+        transform: rotate(-18deg) translateX(-80%);
+      }
+      54% {
+        opacity: 0.85;
+      }
+      100% {
+        opacity: 0;
+        transform: rotate(-18deg) translateX(170%);
+      }
+    }
+
+    @keyframes card-sheen {
+      0%, 58% {
+        transform: translateX(-120%);
+      }
+      100% {
+        transform: translateX(120%);
+      }
+    }
+
+    @keyframes instrument-ring {
+      from {
+        opacity: 0.42;
+        transform: scale(0.7);
+      }
+      to {
+        opacity: 0;
+        transform: scale(1.34);
+      }
+    }
+
+    @keyframes instrument-float {
+      0%, 100% {
+        transform: translateY(0) rotate(-1deg);
+      }
+      50% {
+        transform: translateY(-4px) rotate(1deg);
+      }
+    }
+
+    @keyframes stamp-bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    @keyframes play-sweep {
+      0%, 48% {
+        transform: translateX(-120%);
+      }
+      100% {
+        transform: translateX(120%);
+      }
+    }
+
+    @keyframes play-bar {
+      0%, 100% {
+        transform: scaleY(0.48);
+      }
+      45% {
+        transform: scaleY(1.25);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .track-detail {
+        padding: 0 20px 78px;
+      }
+
+      .track-back {
+        margin: 18px 0 22px;
+      }
+
       .track-grid {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: 1fr;
+      }
+
+      .track-stage {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 8px;
+      }
+
+      .artifact-card {
+        min-height: 210px;
+      }
+
+      .instrument-field {
+        min-height: 104px;
+      }
+
+      .track-title {
+        font-size: 42px;
+      }
+
+      .track-play {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .stage-flow,
+      .artifact-card::before,
+      .instrument-ring,
+      .instrument-symbol,
+      .stamp-wrap,
+      .track-play::before,
+      .play-bars span {
+        animation: none;
       }
     }
   </style>
