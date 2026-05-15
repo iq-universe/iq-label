@@ -24,6 +24,7 @@ const { size = 540 } = Astro.props;
   height={Math.round(size * 0.54)}
   viewBox="0 0 560 300"
   fill="none"
+  overflow="visible"
   aria-label="IQ resonator guitar mark"
   role="img"
 >
@@ -121,7 +122,7 @@ const { size = 540 } = Astro.props;
   }
 
   .iq-waves {
-    filter: drop-shadow(0 0 14px rgba(232, 72, 82, 0.16));
+    mix-blend-mode: screen;
   }
 
   .iq-wave,
@@ -131,9 +132,11 @@ const { size = 540 } = Astro.props;
     opacity: 0;
     transform-box: view-box;
     transform-origin: 310px 150px;
+    vector-effect: non-scaling-stroke;
   }
 
   .iq-wave {
+    stroke-linecap: round;
     animation: iq-wave-spread 7.6s cubic-bezier(0.1, 0.7, 0.12, 1) infinite;
   }
 
@@ -355,7 +358,7 @@ const { size = 540 } = Astro.props;
     }
     100% {
       opacity: 0;
-      transform: scale(5.65);
+      transform: scale(2.45);
       stroke-width: 0.12px;
     }
   }

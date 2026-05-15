@@ -71,7 +71,7 @@ const instrumentLabel = track.fusion_with_label || track.fusion_with;
     min-height: min(72vh, 680px);
     margin: 0 auto;
     padding: clamp(74px, 8vw, 112px) 32px clamp(80px, 9vw, 118px);
-    overflow: hidden;
+    overflow: visible;
     isolation: isolate;
   }
 
@@ -117,10 +117,46 @@ const instrumentLabel = track.fusion_with_label || track.fusion_with;
     opacity: 0.9;
   }
 
+  .resonator-wrap {
+    position: relative;
+    isolation: isolate;
+    overflow: visible;
+  }
+
+  .resonator-wrap::before,
+  .resonator-wrap::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 55.35%;
+    width: 22%;
+    aspect-ratio: 1;
+    border: 1.4px solid rgba(232, 72, 82, 0.42);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    will-change: transform, opacity;
+    transform: translate(-50%, -50%) scale(0.72);
+    animation: resonator-stage-wave 7.6s cubic-bezier(0.1, 0.7, 0.12, 1) 2s infinite;
+  }
+
+  .resonator-wrap::after {
+    width: 20%;
+    border-color: rgba(212, 178, 122, 0.46);
+    animation-delay: 5.8s;
+  }
+
   .resonator-wrap,
   .resonator-wrap :global(svg) {
     width: 100%;
     height: auto;
+  }
+
+  .resonator-wrap :global(svg) {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
   }
 
   .hero-title {
@@ -147,6 +183,23 @@ const instrumentLabel = track.fusion_with_label || track.fusion_with;
     50% {
       opacity: 1;
       transform: translate(-50%, -50%) scale(1.08);
+    }
+  }
+
+  @keyframes resonator-stage-wave {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.72);
+    }
+    9% {
+      opacity: 0.62;
+    }
+    44% {
+      opacity: 0.18;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(4.85);
     }
   }
 
@@ -275,6 +328,8 @@ const instrumentLabel = track.fusion_with_label || track.fusion_with;
 
   @media (prefers-reduced-motion: reduce) {
     .hero-core,
+    .resonator-wrap::before,
+    .resonator-wrap::after,
     .hero-play::before {
       animation: none;
     }
