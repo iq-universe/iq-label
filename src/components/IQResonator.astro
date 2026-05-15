@@ -8,7 +8,7 @@
  * - The I slides in diagonally like a guitar neck.
  * - Q settles into the middle as the resonant body.
  * - Fine strings are laid over that shared axis.
- * - Slow, quiet waves emanate from the Q body.
+ * - Dramatic waves emanate only from the Q body.
  */
 
 interface Props {
@@ -59,10 +59,18 @@ const { size = 540 } = Astro.props;
     <circle cx="532" cy="132" r="0.5" />
   </g>
 
-  <g class="iq-waves" stroke="#E84852" fill="none">
-    <circle class="iq-wave iq-wave-1" cx="310" cy="150" r="54" stroke-width="0.72" />
-    <circle class="iq-wave iq-wave-2" cx="310" cy="150" r="54" stroke-width="0.58" />
-    <circle class="iq-wave iq-wave-3" cx="310" cy="150" r="54" stroke-width="0.46" />
+  <g class="iq-waves" fill="none">
+    <circle class="iq-wave iq-wave-1" cx="310" cy="150" r="58" stroke="#E84852" stroke-width="0.98" />
+    <circle class="iq-wave iq-wave-2" cx="310" cy="150" r="58" stroke="#E84852" stroke-width="0.82" />
+    <circle class="iq-wave iq-wave-3" cx="310" cy="150" r="58" stroke="#D4B27A" stroke-width="0.68" />
+    <circle class="iq-wave iq-wave-4" cx="310" cy="150" r="58" stroke="#E84852" stroke-width="0.5" />
+    <circle class="iq-impact-ring" cx="310" cy="150" r="70" stroke="#F2EAD8" stroke-width="0.9" />
+    <circle class="iq-orbit-ring" cx="310" cy="150" r="84" stroke="#D4B27A" stroke-width="0.55" stroke-dasharray="5 13" />
+    <g class="iq-strum-flashes" stroke="#D4B27A" stroke-linecap="round">
+      <line class="iq-flash iq-flash-1" x1="236" y1="112" x2="382" y2="78" />
+      <line class="iq-flash iq-flash-2" x1="238" y1="190" x2="394" y2="150" />
+      <line class="iq-flash iq-flash-3" x1="264" y1="232" x2="408" y2="198" />
+    </g>
   </g>
 
   <circle class="iq-body-aura" cx="310" cy="150" r="92" fill="url(#iq-body-glow)" />
@@ -112,23 +120,74 @@ const { size = 540 } = Astro.props;
     animation: iq-body-bloom 1.35s ease-out 1.25s forwards;
   }
 
-  .iq-wave {
+  .iq-waves {
+    filter: drop-shadow(0 0 14px rgba(232, 72, 82, 0.16));
+  }
+
+  .iq-wave,
+  .iq-impact-ring,
+  .iq-orbit-ring,
+  .iq-flash {
     opacity: 0;
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: iq-wave-spread 10.8s cubic-bezier(0.16, 0.72, 0.22, 1) infinite;
+    transform-box: view-box;
+    transform-origin: 310px 150px;
+  }
+
+  .iq-wave {
+    animation: iq-wave-spread 7.6s cubic-bezier(0.1, 0.7, 0.12, 1) infinite;
   }
 
   .iq-wave-1 {
-    animation-delay: 2.25s;
+    animation-delay: 2s;
   }
 
   .iq-wave-2 {
-    animation-delay: 5.85s;
+    animation-delay: 3.9s;
   }
 
   .iq-wave-3 {
-    animation-delay: 9.45s;
+    animation-delay: 5.8s;
+  }
+
+  .iq-wave-4 {
+    animation-delay: 7.7s;
+  }
+
+  .iq-impact-ring {
+    stroke-dasharray: 12 10;
+    animation: iq-impact-snap 3.8s ease-out 2s infinite;
+  }
+
+  .iq-orbit-ring {
+    opacity: 0.22;
+    animation:
+      iq-orbit-roll 18s linear infinite,
+      iq-orbit-breathe 5.8s ease-in-out 2s infinite;
+  }
+
+  .iq-strum-flashes {
+    transform-box: view-box;
+    transform-origin: 310px 150px;
+    transform: rotate(-18deg);
+  }
+
+  .iq-flash {
+    stroke-width: 0.72;
+    stroke-dasharray: 160;
+    stroke-dashoffset: 160;
+    animation: iq-flash-strum 3.8s ease-out infinite;
+  }
+
+  .iq-flash-1 {
+    animation-delay: 2.08s;
+  }
+
+  .iq-flash-2 {
+    animation-delay: 2.17s;
+  }
+
+  .iq-flash-3 {
+    animation-delay: 2.26s;
   }
 
   .iq-i-sweep,
@@ -201,7 +260,7 @@ const { size = 540 } = Astro.props;
     opacity: 0;
     transform-box: fill-box;
     transform-origin: center;
-    animation: iq-source-breathe 3.2s ease-in-out 2.05s infinite;
+    animation: iq-source-breathe 3.8s ease-in-out 2s infinite;
   }
 
   @keyframes iq-i-slide {
@@ -267,31 +326,89 @@ const { size = 540 } = Astro.props;
 
   @keyframes iq-source-breathe {
     0%, 100% {
-      opacity: 0.72;
-      transform: scale(0.94);
+      opacity: 0.82;
+      transform: scale(0.88);
     }
-    50% {
+    18% {
       opacity: 1;
-      transform: scale(1.24);
+      transform: scale(1.45);
+    }
+    46% {
+      opacity: 0.76;
+      transform: scale(0.98);
     }
   }
 
   @keyframes iq-wave-spread {
     0% {
       opacity: 0;
-      transform: scale(0.64);
-      stroke-width: 0.9px;
+      transform: scale(0.52);
+      stroke-width: 1.15px;
     }
-    12% {
-      opacity: 0.34;
+    9% {
+      opacity: 0.7;
+      stroke-width: 0.86px;
     }
-    62% {
-      opacity: 0.12;
+    42% {
+      opacity: 0.2;
+      stroke-width: 0.42px;
     }
     100% {
       opacity: 0;
-      transform: scale(4.25);
-      stroke-width: 0.22px;
+      transform: scale(5.65);
+      stroke-width: 0.12px;
+    }
+  }
+
+  @keyframes iq-impact-snap {
+    0%, 68%, 100% {
+      opacity: 0;
+      transform: scale(0.86) rotate(-10deg);
+    }
+    6% {
+      opacity: 0.76;
+      transform: scale(1.02) rotate(0deg);
+    }
+    24% {
+      opacity: 0;
+      transform: scale(1.36) rotate(20deg);
+    }
+  }
+
+  @keyframes iq-orbit-roll {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes iq-orbit-breathe {
+    0%, 100% {
+      opacity: 0.12;
+    }
+    28% {
+      opacity: 0.34;
+    }
+    56% {
+      opacity: 0.18;
+    }
+  }
+
+  @keyframes iq-flash-strum {
+    0%, 62%, 100% {
+      opacity: 0;
+      stroke-dashoffset: 160;
+      transform: translateX(-12px);
+    }
+    8% {
+      opacity: 0.8;
+    }
+    22% {
+      opacity: 0;
+      stroke-dashoffset: -28;
+      transform: translateX(16px);
     }
   }
 
@@ -304,7 +421,10 @@ const { size = 540 } = Astro.props;
     .iq-strings,
     .iq-string,
     .iq-source,
-    .iq-wave {
+    .iq-wave,
+    .iq-impact-ring,
+    .iq-orbit-ring,
+    .iq-flash {
       animation: none;
     }
 
@@ -333,7 +453,10 @@ const { size = 540 } = Astro.props;
       opacity: 0.86;
     }
 
-    .iq-wave {
+    .iq-wave,
+    .iq-impact-ring,
+    .iq-orbit-ring,
+    .iq-flash {
       display: none;
     }
   }

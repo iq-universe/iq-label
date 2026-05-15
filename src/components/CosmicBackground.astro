@@ -68,29 +68,6 @@ const dustParticles = Array.from({ length: 60 }, (_, i) => {
     <rect width="100" height="100" fill="url(#amber-cluster)" />
     <rect width="100" height="100" fill="url(#supernova-core-bright)" />
 
-    <g class="orbital-system">
-      <ellipse
-        cx="78"
-        cy="20"
-        rx="14"
-        ry="14"
-        fill="none"
-        stroke="rgba(232, 72, 82, 0.18)"
-        stroke-width="0.08"
-        stroke-dasharray="0.6 1.2"
-      />
-      <ellipse
-        cx="78"
-        cy="20"
-        rx="22"
-        ry="22"
-        fill="none"
-        stroke="rgba(232, 72, 82, 0.12)"
-        stroke-width="0.06"
-        stroke-dasharray="0.4 2"
-      />
-    </g>
-
     <circle cx="78" cy="20" r="0.6" fill="rgba(255, 230, 210, 0.95)">
       <animate attributeName="r" values="0.5;0.95;0.5" dur="3.5s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="0.7;1;0.7" dur="3.5s" repeatCount="indefinite" />
@@ -121,14 +98,7 @@ const dustParticles = Array.from({ length: 60 }, (_, i) => {
     }
   </svg>
 
-  <div class="ripple-layer">
-    <span class="ripple ripple-red ripple-r1"></span>
-    <span class="ripple ripple-red ripple-r2"></span>
-    <span class="ripple ripple-red ripple-r3"></span>
-    <span class="ripple ripple-purple ripple-p1"></span>
-    <span class="ripple ripple-purple ripple-p2"></span>
-    <span class="ripple ripple-center ripple-c1"></span>
-
+  <div class="motion-layer">
     <span class="meteor meteor-1"></span>
     <span class="meteor meteor-2"></span>
     <span class="meteor meteor-3"></span>
@@ -167,116 +137,11 @@ const dustParticles = Array.from({ length: 60 }, (_, i) => {
     }
   }
 
-  .orbital-system {
-    transform-origin: 78px 20px;
-    animation: orbital-rotate 90s linear infinite;
-    transform-box: view-box;
-  }
-
-  @keyframes orbital-rotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .ripple-layer {
+  .motion-layer {
     position: absolute;
     inset: 0;
     pointer-events: none;
     overflow: hidden;
-  }
-
-  .ripple {
-    position: absolute;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    width: 0;
-    height: 0;
-    box-sizing: border-box;
-  }
-
-  .ripple-red {
-    top: 18%;
-    left: 78%;
-    border: 1.6px solid rgba(232, 72, 82, 0.42);
-    animation: ripple-red-anim 16s cubic-bezier(0.16, 0.72, 0.22, 1) infinite;
-  }
-  .ripple-r1 { animation-delay: 0s; }
-  .ripple-r2 { animation-delay: 5.4s; }
-  .ripple-r3 { animation-delay: 10.8s; }
-
-  .ripple-purple {
-    top: 70%;
-    left: 18%;
-    border: 1.4px solid rgba(139, 111, 191, 0.34);
-    animation: ripple-purple-anim 18s cubic-bezier(0.16, 0.72, 0.22, 1) infinite;
-  }
-  .ripple-p1 { animation-delay: 1s; }
-  .ripple-p2 { animation-delay: 10s; }
-
-  .ripple-center {
-    top: 50%;
-    left: 50%;
-    border: 1px solid rgba(212, 178, 122, 0.28);
-    animation: ripple-center-anim 22s cubic-bezier(0.16, 0.72, 0.22, 1) infinite;
-  }
-  .ripple-c1 { animation-delay: 4s; }
-
-  @keyframes ripple-red-anim {
-    0% {
-      width: 12px;
-      height: 12px;
-      opacity: 0.42;
-      border-width: 1.7px;
-    }
-    18% {
-      opacity: 0.24;
-    }
-    100% {
-      width: 2200px;
-      height: 2200px;
-      opacity: 0;
-      border-width: 0.2px;
-    }
-  }
-
-  @keyframes ripple-purple-anim {
-    0% {
-      width: 10px;
-      height: 10px;
-      opacity: 0.34;
-      border-width: 1.5px;
-    }
-    18% {
-      opacity: 0.2;
-    }
-    100% {
-      width: 1900px;
-      height: 1900px;
-      opacity: 0;
-      border-width: 0.18px;
-    }
-  }
-
-  @keyframes ripple-center-anim {
-    0% {
-      width: 16px;
-      height: 16px;
-      opacity: 0.28;
-      border-width: 1.2px;
-    }
-    18% {
-      opacity: 0.16;
-    }
-    100% {
-      width: 2300px;
-      height: 2300px;
-      opacity: 0;
-      border-width: 0.14px;
-    }
   }
 
   .meteor {
